@@ -1,5 +1,5 @@
 import { Link, NavLink } from "react-router-dom"
-import Button from "../components/Button"
+import Button from "../components/Buttons"
 
 
 const NavBar = () => {
@@ -11,16 +11,16 @@ const NavBar = () => {
       </Link>
       
       
-      <div className="hidden  bg-gray-200 text-black px-4 py-4 rounded-full sm:flex gap-8 text-medium text-medium">
-        <NavLink to={'/'} className={'text-2xl'}>Home</NavLink>
+      <div className=" bg-gray-200 text-black px-4 py-4 rounded-full hidden sm:flex gap-8 text-medium text-medium">
+        <NavLink to={'/'} >Home</NavLink>
         <NavLink to={'/product'} >Product</NavLink>
         <NavLink to={'/about'} >About</NavLink>
         <NavLink to={'/contact'} >Contact</NavLink>
 
       </div>
 
-        <div className="hidden sm:flex gap-8 text-medium text-xl">
-        <Button text={'Sign-in'} className="bg-black"/>
+        <div className=" gap-8 text-medium text-xl">
+        <Button text={'Sign-in'} className="bg-black px-6 py-3"/>
         </div>
       
     </div>
