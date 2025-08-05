@@ -1,10 +1,11 @@
 
 import { Route, Routes } from 'react-router-dom'
 import './App.css'
-import NavBar from './section/NavBar'
 import Home from './pages/Home'
 import Cart from './pages/Cart'
 import { ProductsPage } from './pages/Product'
+import { isMobile, isTablet, isDesktop } from 'react-device-detect';
+import { BottomAppBar } from './section/bottom_appbar'
 
 
 
@@ -13,7 +14,7 @@ function App() {
 
   return (
     <>
-
+    { isMobile && <BottomAppBar></BottomAppBar>}
     <Routes>
       <Route path='/' element={<Home/>} />
       <Route path='/product' element={<ProductsPage/>} />

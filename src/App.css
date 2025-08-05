@@ -120,5 +120,16 @@
 }
 
 .navbar {
-  @apply flex items-center justify-between mx-4 px-4 py-6 text-primary-foreground;
+  @apply flex items-center justify-between mx-4 px-4 py-6 text-primary-foreground max-sm:mx-0;
+}
+
+/* Hide scrollbar for WebKit-based browsers (Chrome, Safari) */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for Firefox */
+.no-scrollbar {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none;  /* Internet Explorer 10+ */
 }

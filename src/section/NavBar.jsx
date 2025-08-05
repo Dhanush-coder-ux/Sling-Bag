@@ -2,20 +2,22 @@ import { Link, NavLink } from "react-router-dom"
 import Button from "../components/Buttons"
 
 
+
 const NavBar = () => {
   return (
-    <div className="navbar">
+    <div >
+       <div className="navbar">
       <Link to={'/'} className="text-2xl font-bold text-black">
         {/* <img src="" alt="" /> */}
         Sling Bag
       </Link>
       
       
-      <div className=" bg-gray-200 text-black px-4 py-4 rounded-full hidden sm:flex gap-8 text-medium text-medium">
+      <div className={`bg-[#E5E5E5]  text-black text-lg font-semibold px-4 py-4 rounded-full sm:flex gap-8 hidden text-medium text-medium`}>
         <NavLink to={'/'} >Home</NavLink>
         <NavLink to={'/product'} >Product</NavLink>
-        <NavLink to={'/about'} >About</NavLink>
-        <NavLink to={'/contact'} >Contact</NavLink>
+        <NavLink to={'/favourites'} >Favourites</NavLink>
+        <NavLink to={'/contact'} >Know Us</NavLink>
 
       </div>
 
@@ -24,6 +26,8 @@ const NavBar = () => {
         </div>
       
     </div>
+    </div>
+   
   )
 }
 
