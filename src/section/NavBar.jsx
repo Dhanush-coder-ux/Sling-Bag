@@ -19,7 +19,7 @@ const NavBar = () => {
 
       </div>
 
-        <div className=" gap-8 text-medium text-xl">
+        <div className=" gap-8 text-medium text-xl px-6 py-3">
         <Button text={'Sign-in'} className="bg-black px-6 py-3"/>
         </div>
       
