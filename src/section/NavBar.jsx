@@ -14,10 +14,22 @@ const NavBar = () => {
       
       
       <div className={`bg-[#E5E5E5]  text-black text-lg font-semibold px-4 py-4 rounded-full sm:flex gap-8 hidden text-medium text-medium`}>
-        <NavLink to={'/'} >Home</NavLink>
-        <NavLink to={'/product'} >Product</NavLink>
-        <NavLink to={'/favourites'} >Favourites</NavLink>
-        <NavLink to={'/contact'} >Know Us</NavLink>
+        <NavLink className={'flex flex-col items-center'} to={'/'} >
+            Home
+            <hr className="w-2/4 border-none h-[2px] bg-black hidden" />
+        </NavLink>
+        <NavLink  className={'flex flex-col items-center'} to={'/product'} >
+            Product
+            <hr className=" w-2/4 border-none h-[2px] bg-black hidden" />
+        </NavLink>
+        <NavLink  className={'flex flex-col items-center'} to={'/favourites'} >
+            Favourites
+            <hr className="w-2/4 border-none h-[2px] bg-black hidden" />
+        </NavLink>
+        <NavLink  className={'flex flex-col items-center'} to={'/contact'} >
+             Know Us
+            <hr className="w-2/4 border-none h-[2px] bg-black hidden" />
+        </NavLink>
 
       </div>
 

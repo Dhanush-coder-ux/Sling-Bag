@@ -5,7 +5,7 @@ import Home from './pages/Home'
 import Cart from './pages/Cart'
 import { ProductsPage } from './pages/Product'
 import { isMobile, isTablet, isDesktop } from 'react-device-detect';
-import { BottomAppBar } from './section/bottom_appbar'
+import { BottomAppBar } from './section/BottomAppBar'
 
 
 
@@ -14,13 +14,14 @@ function App() {
 
   return (
     <>
-    { isMobile && <BottomAppBar></BottomAppBar>}
+    
     <Routes>
       <Route path='/' element={<Home/>} />
       <Route path='/product' element={<ProductsPage/>} />
       <Route path='/cart' element={<Cart/>}/>
     </Routes>
-      {/* <ProductsPage></ProductsPage> */}
+    { isMobile && <BottomAppBar></BottomAppBar>}
+      
     </>
   )
 }

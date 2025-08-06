@@ -1,36 +1,21 @@
 import React, { useEffect, useState } from 'react'
-import { MobileAppBar } from '../section/mob_appbar';
-import { ProductCard } from '../components/product_card';
+import { MobileAppBar } from '../section/MobileAppBar';
+import { ProductCard } from '../components/ProductCard';
 import { isMobile, isTablet, isDesktop } from 'react-device-detect';
 import NavBar from '../section/NavBar';
-import { Chip } from '../components/chips';
+import { Chip } from '../components/Chip';
 
 
 
 export const ProductsPage = () => {
     
-    const [scrolled, setScrolled] = useState(false);
+   
     const [selectedChipText,setChipClicked]=useState("All");
     const chips=["All","Men's","Women's","Low to High","High to Low"];
-
-    // Scroll listener
-    useEffect(() => {
-      const handleScroll = () => {
-        if (window.scrollY > 10) {
-          setScrolled(true);
-        } else {
-          setScrolled(false);
-        }
-      };
-      window.addEventListener("scroll", handleScroll);
-      
-      return () => window.removeEventListener("scroll", handleScroll);
-    }, []);
-
     return (
       <>
         {/* for crossplatform appbar */}
-          { isMobile ? <MobileAppBar  appbarTitle={"Products"} scrolled={scrolled} withBackArrow={false}></MobileAppBar> : <NavBar/>}
+          { isMobile ? <MobileAppBar  appbarTitle={"Products"}  withBackArrow={true}></MobileAppBar> : <NavBar/>}
 
         {/* for filters */}
           <div className='flex mt-10 mx-8 max-sm:mx-2 max-sm:mt-15'>

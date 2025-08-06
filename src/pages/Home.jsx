@@ -1,5 +1,6 @@
 import NavBar from '../section/NavBar'
 import Hero from '../section/Hero'
+import LatestProduct from '../components/LatestProduct'
 
 
 const Home = () => {
@@ -8,6 +9,7 @@ const Home = () => {
         <NavBar/>
         {/* Hero Section */}
         <Hero/>
+        <LatestProduct/>
 
     </div>
   )
