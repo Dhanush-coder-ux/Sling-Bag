@@ -1,7 +1,7 @@
 import React from 'react'
 
 import { ScrollArea, ScrollBar } from "../components/ui/scroll-area"
-import Title from './Title'
+import Title from '../components/Title'
 import { Products } from '../constant'
 
 

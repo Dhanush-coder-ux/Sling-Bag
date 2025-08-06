@@ -18,7 +18,7 @@ const NavBar = () => {
             Home
             <hr className="w-2/4 border-none h-[2px] bg-black hidden" />
         </NavLink>
-        <NavLink  className={'flex flex-col items-center'} to={'/product'} >
+        <NavLink  className={'flex flex-col items-center'} to={'/collections'} >
             Product
             <hr className=" w-2/4 border-none h-[2px] bg-black hidden" />
         </NavLink>
