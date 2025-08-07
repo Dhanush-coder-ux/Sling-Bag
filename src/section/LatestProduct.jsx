@@ -11,7 +11,7 @@ const LatestProduct = () => {
   return (
     <div>
       <div className='text-center py-8 text-4xl  '>
-        <Title text1={'Fresh'} text2={'Finds'} />
+        <Title text1={'Fresh'} text2={'Finds'} divClassName={"mb-4"}/>
                <hr className="w-full border-none h-[1.5px] bg-gray-400 " />
       </div>
         <ScrollArea className="w-full rounded-md my-10 border whitespace-nowrap">

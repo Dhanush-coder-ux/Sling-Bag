@@ -1,6 +1,6 @@
 const Button = ({ text, className = "", id, onClick }) => {
   return (
-    <div id={id} onClick={onClick} className={`font-semibold text-white cursor-pointer rounded-full shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-xl ${className}`} >
+    <div id={id} onClick={onClick} className={`font-semibold cursor-pointer rounded-full shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-xl ${className}`} >
       <span className="relative z-10">{text}</span>
     </div>
   );
@@ -20,7 +20,7 @@ export const BlackBgButton = ( { text, canHover } ) => {
 }
 
 export const GrayBgButton = ( { text, canHover } ) => {
-  let baseStyle=`bg-[#E5E5E5] font-bold text-black text-center m-3.5 p-2 rounded-full cursor-pointer`;
+  let baseStyle=`bg-[#E5E5E5] font-bold text-black text-center m-3.5 p-3 rounded-full cursor-pointer`;
   let hoverStyle=`hover:bg-[#1A1A1A] hover:text-white`;
 
   let finalStyle=canHover ? `${baseStyle} ${hoverStyle}` : baseStyle;

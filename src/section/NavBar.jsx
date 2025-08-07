@@ -26,7 +26,7 @@ const NavBar = () => {
             Favourites
             <hr className="w-2/4 border-none h-[2px] bg-black hidden" />
         </NavLink>
-        <NavLink  className={'flex flex-col items-center'} to={'/contact'} >
+        <NavLink  className={'flex flex-col items-center'} to={'/know-us'} >
              Know Us
             <hr className="w-2/4 border-none h-[2px] bg-black hidden" />
         </NavLink>

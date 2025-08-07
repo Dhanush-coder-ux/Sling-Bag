@@ -33,7 +33,7 @@ export const ProductsPage = () => {
           <div className=' grid lg:grid-cols-4  max-sm:grid-cols-2 max-sm:mb-20 gap-4 mt-8 mx-2 md:mx-8 md:grid-cols-2 md:mb-20 '>  
             {
               Productsjson.map((value)=>(
-                <ProductCard product={{id:value.id,title:value.title,description:value.description,price:value.price,isFavourite:value.isFav,images:value.image}}></ProductCard>
+                <ProductCard  key={value.id} product={{id:value.id,title:value.title,description:value.description,price:value.price,isFavourite:value.isFav,images:value.image}}></ProductCard>
               ))
             }
           </div>

@@ -3,7 +3,7 @@ export const navbars=[
         {label:'Products',icon:"/icons/product.svg",route:'/collections'},
         {label:'Cart',icon:"/icons/cart.svg",route:'/cart'},
         {label:'Favourite',icon:"/icons/favourite.svg",route:'/favourite'},
-        {label:'Know us',icon:"/icons/about.svg",route:'/contact'}
+        {label:'Know us',icon:"/icons/about.svg",route:'/know-us'}
     ]
 
  export const images = [
@@ -15,7 +15,7 @@ export const navbars=[
 export const Productsjson =[
   {
     "id": 1,
-    "titl": "Leather Handbag",
+    "title": "Leather Handbag",
     "description": "Premium leather handbag for everyday use. Premium leather handbag for everyday use.Premium leather handbag for everyday use.Premium leather handbag for everyday use.Premium leather handbag for everyday use.Premium leather handbag for everyday use.Premium leather handbag for everyday use.Premium leather handbag for everyday use.Premium leather handbag for everyday use.Premium leather handbag for everyday use.Premium leather handbag for everyday use.Premium leather handbag for everyday use.Premium leather handbag for everyday use.",
     "price": 2499,
     "isFav": false,
@@ -208,4 +208,13 @@ export const Products= [
     image: "https://images.unsplash.com/photo-1465869185982-5a1a7522cbcb?auto=format&fit=crop&w=300&q=80",
     prize:"453$",
   },
-]    
+]
+
+export const ourStory=` At the heart of our brand is a commitment to crafting exceptional, personalized bags that reflect your unique style and needs. We believe that a bag is more than just an
+          accessory; it's an extension of your identity, a companion on your daily adventures, and a statement of your individuality.`
+
+
+export const ourWork=`Our team is a collective of passionate designers, skilled artisans, and dedicated customer service professionals. We work collaboratively to bring your vision to life,
+          ensuring every detail is perfect.`
+
+export const ourWorkImageUrl="https://lh3.googleusercontent.com/aida-public/AB6AXuACDKJ_I-tkjsS49zOyhk1-Q986MQTPX2AemzCtGg2AcBMiwIYXykbK_F9ahfT7C_2_ZQ2nyMFjroZOgGa7Zstuh0lUDijjhRL8aEjtplyeQ8kkKfIKL0SVRhJZue2pYBuSVRTe7LULll2m97aKtB3lgfFL6napJyMHl0omUhRFRBOUfI9T0HGqRuz0zqgDca2qcLmgNlmqBHEzhdGjml5PHPS7OjxXj4wczPnKcqNStwdGvtNsoci9KqxAuTTmqRlDvnApjqAVRg"

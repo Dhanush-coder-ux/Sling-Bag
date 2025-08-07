@@ -24,8 +24,8 @@ const Hero = () => {
         </p>
 
         <div className='mt-8 flex flex-col sm:flex-row justify-center gap-4'>
-        <Button text={'Customize Now'} className='bg-black px-6 py-3'/>
-        <Button text={'Shop Ready Bags'}className='bg-gradient-to-r from-blue-600 to-purple-600 px-6 py-3' />
+        <Button text={'Customize Now'} className='bg-black px-6 py-3 text-white'/>
+        <Button text={'Shop Ready Bags'}className='bg-gradient-to-r from-blue-600 to-purple-600 px-6 py-3 text-white' />
         
 
         </div>
