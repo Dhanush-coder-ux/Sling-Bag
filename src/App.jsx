@@ -7,6 +7,7 @@ import { ProductsPage } from './pages/Product'
 import { isMobile, isTablet, isDesktop } from 'react-device-detect';
 import { BottomAppBar } from './section/BottomAppBar'
 import ProductView from './pages/ProductView'
+import FavouritePage from './pages/Favourite'
 
 
 
@@ -21,6 +22,7 @@ function App() {
       <Route path='/collections' element={<ProductsPage/>} />
       <Route path='/cart' element={<Cart/>}/>
       <Route path='/product/:productId' element={<ProductView/>} />
+      <Route path='/favourite' element={<FavouritePage/>}/>
     </Routes>
     { isMobile && <BottomAppBar></BottomAppBar>}
       

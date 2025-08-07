@@ -22,7 +22,7 @@ const NavBar = () => {
             Product
             <hr className=" w-2/4 border-none h-[2px] bg-black hidden" />
         </NavLink>
-        <NavLink  className={'flex flex-col items-center'} to={'/favourites'} >
+        <NavLink  className={'flex flex-col items-center'} to={'/favourite'} >
             Favourites
             <hr className="w-2/4 border-none h-[2px] bg-black hidden" />
         </NavLink>
