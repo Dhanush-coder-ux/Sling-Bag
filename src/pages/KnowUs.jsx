@@ -34,7 +34,7 @@ export default function KnowUsPage() {
                 </div>
 
                 <div className='font-semibold mx-2 text-center'>
-                    <img src={ourWorkImageUrl} alt="" className='object-cover-border rounded-2xl h-70 w-full mt-5'/>
+                    <img src={ourWorkImageUrl} alt="" className='object-cover rounded-2xl  w-full mt-5'/>
                     <h1 className='mt-5'>{ourWork}</h1>
                 </div>  
             </div>

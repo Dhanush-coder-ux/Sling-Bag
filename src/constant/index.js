@@ -2,7 +2,6 @@ export const navbars=[
         {label:'Home',icon:"/icons/home.svg",route:'/'},
         {label:'Products',icon:"/icons/product.svg",route:'/collections'},
         {label:'Cart',icon:"/icons/cart.svg",route:'/cart'},
-        {label:'Favourite',icon:"/icons/favourite.svg",route:'/favourite'},
         {label:'Know us',icon:"/icons/about.svg",route:'/know-us'}
     ]
 
@@ -11,7 +10,7 @@ export const navbars=[
     "/images/bag.png",
     "/images/bag.png",
   ]  
-  
+export const chips=["All","Men's","Women's","Low to High","High to Low"];
 export const Productsjson =[
   {
     "id": 1,
