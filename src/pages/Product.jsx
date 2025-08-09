@@ -1,10 +1,10 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { MobileAppBar } from '../section/MobileAppBar';
-import { ProductCard } from '../components/ProductCard';
+import { FavouriteProductCard, ProductCard } from '../components/ProductCard';
 import { isMobile, isTablet, isDesktop } from 'react-device-detect';
 import NavBar from '../section/NavBar';
 import { Chip } from '../components/Chip';
-import { chips} from '../constant';
+import { chips } from '../constant';
 import { BagContext } from '../context/BagContext';
 
 
@@ -48,11 +48,12 @@ export const ProductsPage = () => {
                       price={item.price}
                       images={item.image}
 
-                      />
+                  />
               ))
+
+              
             }
           </div>
-      
       </>
     )
 }

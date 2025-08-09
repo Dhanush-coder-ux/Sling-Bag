@@ -19,6 +19,17 @@ const BagContextProvider = (props) => {
       setCartItems(cartData);
     }
 
+    const removeToCart = async (productId) => {
+      let cartData = structuredClone(cartItems);
+
+      if (cartData[productId]) {
+        cartData[productId] -= 1;
+      } else {
+        cartData[productId] = 0;
+      }
+      setCartItems(cartData);
+    }
+
     const getCartCount = () => {
       let count = 0;
       for (const key in cartItems) {
@@ -31,7 +42,7 @@ const BagContextProvider = (props) => {
 
 
     const value ={
-        Productsjson,rupees,cartItems, setCartItems, addToCart,getCartCount
+        Productsjson,rupees,cartItems, setCartItems,addToCart,getCartCount,removeToCart
     }
 
   return (

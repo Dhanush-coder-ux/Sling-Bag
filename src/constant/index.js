@@ -1,11 +1,4 @@
-export const navbars=[
-        {label:'Home',icon:"/icons/home.svg",route:'/'},
-        {label:'Products',icon:"/icons/product.svg",route:'/collections'},
-        {label:'Cart',icon:"/icons/cart.svg",route:'/cart'},
-        {label:'Know us',icon:"/icons/about.svg",route:'/know-us'}
-    ]
-
- export const images = [
+export const images = [
     "/images/bag.png",
     "/images/bag.png",
     "/images/bag.png",

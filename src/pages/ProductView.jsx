@@ -1,11 +1,13 @@
 import { MobileAppBar } from '../section/MobileAppBar';
 import ProductSlide from '../components/ProductSlide';
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import { useParams, useLocation } from 'react-router-dom'
 import { isMobile } from 'react-device-detect';
 import NavBar from '../section/NavBar';
-import Button, { GrayBgButton } from '../components/Buttons';
+import Button, { BlackBgButton, GrayBgButton} from '../components/Buttons';
 import { BagContext } from '../context/BagContext';
+import { Counter } from '../components/Counter';
+import { platinum } from '../constant/ColorCodes';
 
 const ProductView = () => {
     
@@ -20,11 +22,11 @@ const ProductView = () => {
           { isMobile ? <MobileAppBar  appbarTitle={"Product"}  withBackArrow={true} ></MobileAppBar> : <NavBar/>}
 
         {/* product overview infos */}
-        <div className='flex justify-center items-center max-sm:mt-20 max-sm:mb-20 md:mt-20 md:mb-10 lg:mt-0 pt-10 lg:mb-0'>
-          <div className={`flext justify-center items-center flex-row  w-200 max-sm:w-full max-sm:mx-2 md:mt-10 lg:m-0`}>
+        <div className='flex justify-center items-center max-sm:mt-15 max-sm:mb-20 md:mt-10 md:mb-10 lg:mt-0 lg:mb-10'>
+          <div className={`flext justify-center items-center flex-row w-200 max-sm:w-full max-sm:mx-2 md:mt-10 lg:m-0`}>
             <div className='flex flex-col text-center justify-center items-center'>
 
-              <div className='w-80 p-5 max-sm:mt-20 mt-0 lg:w-150'>
+              <div className='w-80 p-5 mt-0 lg:w-150'>
                 <ProductSlide/>
               </div>
 
@@ -41,17 +43,12 @@ const ProductView = () => {
 
                   </div>
               </div>
-               <div className='mt-8 flex flex-col sm:flex-row justify-between gap-4'>
-                      <button onClick={()=>addToCart(productId)} className='border flex gap-4 border-black rounded-lg  w-50 p-2 mb-2'>
-                       
-                        <p className='font-semibold ml-5'>Add to Cart</p>
-                         <img src="/icons/cart.svg" width={30} height={30} alt="" />
-                      </button>
-                      <Button text={"Customize"} className={`bg-black rounded-lg text-white w-50 p-2 mb-2`}/>
-                    </div>
+              <div className='mt-5 max-sm:px-2 flex justify-between items-end gap-4 w-150 max-sm:w-full text-center'>
+                      <Counter productId={productId} className={'p-1'}></Counter>
+                      <Button text={"Customize"} className={`bg-[${platinum}] rounded-lg text-black w-50 p-2 mb-2 text-center`}/>
+              </div>
 
             </div>
-            
           </div>
         </div>
       </>

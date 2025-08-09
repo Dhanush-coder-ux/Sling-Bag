@@ -3,8 +3,9 @@ import Title from '../components/Title';
 import { BagContext } from '../context/BagContext'
 import React, { useContext, useEffect, useState } from 'react'
 import NavBar from '../section/NavBar';
-import { isMobile } from 'react-device-detect';
+import { isDesktop, isMobile } from 'react-device-detect';
 import { Link } from 'react-router-dom';
+import { FavouriteProductCard } from '../components/ProductCard';
 
 const Cart = () => {
   const { Productsjson,rupees,cartItems,} = useContext(BagContext);
@@ -27,35 +28,29 @@ useEffect(() => {
 
   return (
     <>
-         { isMobile ? <MobileAppBar  appbarTitle={"Cart"}  withBackArrow={true} ></MobileAppBar> : <NavBar/>}
-       <div className='pt-10 '>
-      <div className='flex justify-center items-center mb-10'>
-        <Title text1={'Your'} text2={'Cart'} text1ClassName={"font-bold text-[30px]"} text2ClassName={"font-bold"} />
-      </div>
-
-      <div className='flex justify-center items-center mt-4 flex-col'>
+      { isMobile ? <MobileAppBar  appbarTitle={"Cart"}  withBackArrow={true} ></MobileAppBar> : <NavBar/>}
+      <div className='lg:pt-5 '>
         {
-          cartData.map( (item,index) => {
-            return (
-              <Link to={`/product/${item.id}`} key={index} className='flex justify-between items-center w-3/4 p-4 border-b border-gray-300'>
-                <div className='flex items-center gap-4'>
-                  <img src={item.image[0]} alt={item.title} className='w-20 h-20 object-cover' />
-                  <div>
-                    <h3 className='text-lg font-semibold'>{item.title}</h3>
-                    <p className='text-gray-600 py-3'>Price: {(item.price)}</p>
-                    <p className='text-gray-600'>Quantity: {item.quantity}</p>
-                  </div>
-                </div>
-                <div className='text-lg font-bold'>
-                  <img src="/icons/delete.svg" width={30} height={30} className='cursor-pointer' alt="" />
-                </div>
-              </Link>
-            )
+          isDesktop &&
+          <div className='flex justify-center items-center mb-10'>
+            <Title text1={'Your'} text2={'Cart'} text1ClassName={"font-bold text-[30px]"} text2ClassName={"font-bold"} />
+          </div>
+        }
 
-          })
+        {
+          cartData.length>0 ?
+            <div className={`${cartData.length>1? 'grid lg:grid-cols-2' : 'grid lg:grid-cols-1'} space-y-3.5 space-x-3.5 place-items-center lg:mt-10 mx-8 max-sm:mx-2 max-sm:mt-20 max-sm:mb-20 md:mt-20 md:mb-20`}>
+              {
+                cartData.map((value)=>(
+                  <FavouriteProductCard key={value.id} product={{id:value.id,title:value.title,description:value.description,price:value.price,images:value.image,quantity:value.quantity}}></FavouriteProductCard>
+                ))
+              }
+            </div>
+          :  <div className='flex justify-center items-center text-amber-700 font-bold text-3xl max-sm:mt-20'>
+                <span >Your Cart Is Empty </span>
+              </div>
         }
       </div>
-    </div>
     </>
  
   )
