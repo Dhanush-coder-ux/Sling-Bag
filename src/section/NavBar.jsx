@@ -35,10 +35,10 @@ const NavBar = () => {
       </div>
       
 
-        <div className="flex gap-8 text-medium text-xl px-6 py-3">
+        <div className="flex gap-8 text-medium text-xl max-sm:px-2 px-4 py-3">
             <div className="px-4 py-3" >
           
-        <NavLink  className={'relative'} to={'/cart'} >
+        <NavLink  className={'relative sm:flex hidden '} to={'/cart'} >
           <img src="/icons/carts.svg" width={30} height={30} alt="" />
           <p className="absolute right-[-5px] bottom-[-5px] w-4 text-center leading-4 bg-red-600 aspect-square rounded-full text-white text-[8px]">{getCartCount()}</p>
         </NavLink>

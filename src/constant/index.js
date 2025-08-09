@@ -5,12 +5,8 @@ export const navbars=[
         {label:'Know us',icon:"/icons/about.svg",route:'/know-us'}
     ]
 
- export const images = [
-    "/images/bag.png",
-    "/images/bag.png",
-    "/images/bag.png",
-  ]  
-export const chips=["All","Men's","Women's","Low to High","High to Low"];
+ 
+export const chips=["All","men","women","low to high","high to low"];
 export const Productsjson =[
   {
     "id": 1,
@@ -18,10 +14,11 @@ export const Productsjson =[
     "description": "Premium leather handbag for everyday use. Premium leather handbag for everyday use.Premium leather handbag for everyday use.Premium leather handbag for everyday use.Premium leather handbag for everyday use.Premium leather handbag for everyday use.Premium leather handbag for everyday use.Premium leather handbag for everyday use.Premium leather handbag for everyday use.Premium leather handbag for everyday use.Premium leather handbag for everyday use.Premium leather handbag for everyday use.Premium leather handbag for everyday use.",
     "price": 2499,
     "isFav": false,
+    "category":"women",
     "image": [
       "/images/bag.png",
       "/images/bag.png",
-      "/images/bag.png"
+      
     ]
   },
   {
@@ -30,6 +27,7 @@ export const Productsjson =[
     "description": "Stylish and durable backpack for school or travel.",
     "price": 1899,
     "isFav": true,
+     "category":"men",
     "image": [
       "/images/bag.png",
       "/images/bag.png",
@@ -42,6 +40,7 @@ export const Productsjson =[
     "description": "Slim protective sleeve for laptops up to 15 inches.",
     "price": 999999990,
     "isFav": false,
+     "category":"men",
     "image": [
       "/images/bag.png",
       "/images/bag.png",
@@ -54,6 +53,7 @@ export const Productsjson =[
     "description": "Spacious duffel bag perfect for short trips.",
     "price": 2999,
     "isFav": true,
+     "category":"men",
     "image": [
       "/images/bag.png",
       "/images/bag.png",
@@ -66,6 +66,7 @@ export const Productsjson =[
     "description": "Classic crossbody bag with multiple compartments.",
     "price": 2199,
     "isFav": false,
+     "category":"men",
     "image": [
       "/images/bag.png",
       "/images/bag.png",
@@ -78,6 +79,7 @@ export const Productsjson =[
     "description": "Compact sling bag for essentials on the go.",
     "price": 799,
     "isFav": true,
+     "category":"men",
     "image": [
       "/images/bag.png",
       "/images/bag.png",
@@ -90,6 +92,7 @@ export const Productsjson =[
     "description": "Water-resistant gym bag with shoe compartment.",
     "price": 1599,
     "isFav": false,
+     "category":"men",
     "image": [
       "/images/bag.png",
       "/images/bag.png",
@@ -102,6 +105,7 @@ export const Productsjson =[
     "description": "Eco-friendly tote bag made from recycled materials.",
     "price": 499,
     "isFav": true,
+     "category":"men",
     "image": [
       "/images/bag.png",
       "/images/bag.png",
@@ -114,6 +118,7 @@ export const Productsjson =[
     "description": "Shockproof bag designed for DSLR and accessories.",
     "price": 2799,
     "isFav": false,
+     "category":"men",
     "image": [
       "/images/bag.png",
       "/images/bag.png",
@@ -126,6 +131,7 @@ export const Productsjson =[
     "description": "Colorful school bag for children aged 5-10.",
     "price": 1399,
     "isFav": true,
+     "category":"men",
     "image": [
       "/images/bag.png",
       "/images/bag.png",
@@ -136,78 +142,6 @@ export const Productsjson =[
 
   
 
-export const Products= [
-  {
-    Product: "Ornella Binni",
-    image: "https://images.unsplash.com/photo-1465869185982-5a1a7522cbcb?auto=format&fit=crop&w=300&q=80",
-    prize:"453$",
-  },
-  {
-    Product: "Ornella Binni",
-    image: "https://images.unsplash.com/photo-1465869185982-5a1a7522cbcb?auto=format&fit=crop&w=300&q=80",
-    prize:"453$",
-  },
-  {
-      Product: "Ornella Binni",
-    image: "https://images.unsplash.com/photo-1465869185982-5a1a7522cbcb?auto=format&fit=crop&w=300&q=80",
-    prize:"453$",
-  },
-  {
-      Product: "Ornella Binni",
-    image: "https://images.unsplash.com/photo-1465869185982-5a1a7522cbcb?auto=format&fit=crop&w=300&q=80",
-    prize:"453$",
-  },
-  {
-      Product: "Ornella Binni",
-    image: "https://images.unsplash.com/photo-1465869185982-5a1a7522cbcb?auto=format&fit=crop&w=300&q=80",
-    prize:"453$",
-  },
-  {
-      Product: "Ornella Binni",
-    image: "https://images.unsplash.com/photo-1465869185982-5a1a7522cbcb?auto=format&fit=crop&w=300&q=80",
-    prize:"453$",
-  },
-  {
-      Product: "Ornella Binni",
-    image: "https://images.unsplash.com/photo-1465869185982-5a1a7522cbcb?auto=format&fit=crop&w=300&q=80",
-    prize:"453$",
-  },
-  {
-      Product: "Ornella Binni",
-    image: "https://images.unsplash.com/photo-1465869185982-5a1a7522cbcb?auto=format&fit=crop&w=300&q=80",
-    prize:"453$",
-  },
-  {
-      Product: "Ornella Binni",
-    image: "https://images.unsplash.com/photo-1465869185982-5a1a7522cbcb?auto=format&fit=crop&w=300&q=80",
-    prize:"453$",
-  },
-  {
-      Product: "Ornella Binni",
-    image: "https://images.unsplash.com/photo-1465869185982-5a1a7522cbcb?auto=format&fit=crop&w=300&q=80",
-    prize:"453$",
-  },
-  {
-      Product: "Ornella Binni",
-    image: "https://images.unsplash.com/photo-1465869185982-5a1a7522cbcb?auto=format&fit=crop&w=300&q=80",
-    prize:"453$",
-  },
-  {
-      Product: "Ornella Binni",
-    image: "https://images.unsplash.com/photo-1465869185982-5a1a7522cbcb?auto=format&fit=crop&w=300&q=80",
-    prize:"453$",
-  },
-  {
-      Product: "Ornella Binni",
-    image: "https://images.unsplash.com/photo-1465869185982-5a1a7522cbcb?auto=format&fit=crop&w=300&q=80",
-    prize:"453$",
-  },
-  {
-      Product: "Ornella Binni",
-    image: "https://images.unsplash.com/photo-1465869185982-5a1a7522cbcb?auto=format&fit=crop&w=300&q=80",
-    prize:"453$",
-  },
-]
 
 export const ourStory=` At the heart of our brand is a commitment to crafting exceptional, personalized bags that reflect your unique style and needs. We believe that a bag is more than just an
           accessory; it's an extension of your identity, a companion on your daily adventures, and a statement of your individuality.`

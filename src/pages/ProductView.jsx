@@ -25,7 +25,7 @@ const ProductView = () => {
             <div className='flex flex-col text-center justify-center items-center'>
 
               <div className='w-80 p-5 max-sm:mt-20 mt-0 lg:w-150'>
-                <ProductSlide/>
+                <ProductSlide image={productInfo.image}/>
               </div>
 
               <div className='flex justify-start items-start w-150 max-sm:w-full max-sm:px-3'>
@@ -47,7 +47,7 @@ const ProductView = () => {
                         <p className='font-semibold ml-5'>Add to Cart</p>
                          <img src="/icons/cart.svg" width={30} height={30} alt="" />
                       </button>
-                      <Button text={"Customize"} className={`bg-black rounded-lg text-white w-50 p-2 mb-2`}/>
+                      <Button text={"Buy Now"} className={`bg-black rounded-lg text-white w-50 p-2 mb-2`}/>
                     </div>
 
             </div>

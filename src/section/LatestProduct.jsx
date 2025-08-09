@@ -17,15 +17,14 @@ const LatestProduct = () => {
         <Title text1={'Fresh'} text2={'Finds'} divClassName={"mb-4"}/>
                <hr className="w-full border-none h-[1.5px] bg-gray-400 " />
       </div>
-        <ScrollArea className="w-full rounded-md my-10 border whitespace-nowrap">
-      <div className="flex w-max space-x-4 p-4">
+        <ScrollArea className="w-full rounded-md my-10 py-5 border whitespace-nowrap">
+      <div className="flex w-max space-x-4 py-4">
         {Productsjson.map(({id, image,title,price}) => (
-          <Link to={`/product/${id}`} key={id} className="shrink-0 mx-15 w-[200px]">
+          <Link to={`/product/${id}`} key={id} className="shrink-0 mx-8 w-[200px]">
             <div className="overflow-hidden rounded-md">
               <img
                 src={image[0]}
-                className="aspect-[4/6] h-fit w-fit object-cover"
-            
+                className="aspect-[3/4] h-fit w-fit object-cover"
               />
             </div>
             <figcaption className="text-muted-foreground flex flex-col pt-2  text-xs">

@@ -1,6 +1,6 @@
 
 
-import { images } from "../constant"
+
 import {
   Carousel,
   CarouselContent,
@@ -11,14 +11,14 @@ import {
 
 
 
-const ProductSlide = () => {
+const ProductSlide = ({image}) => {
 
 
   return (
     <div className="w-full max-w-xl mx-auto">
       <Carousel>
         <CarouselContent>
-          {images.map((src, index) => (
+          {image.map((src, index) => (
             <CarouselItem key={index} className="flex justify-center items-center">
               <img
                 src={src}
