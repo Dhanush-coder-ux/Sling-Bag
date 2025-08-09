@@ -5,19 +5,25 @@ import React, { useContext, useEffect, useState } from 'react'
 import NavBar from '../section/NavBar';
 import { isDesktop, isMobile } from 'react-device-detect';
 import { Link } from 'react-router-dom';
-import { FavouriteProductCard } from '../components/ProductCard';
+import { CartProductCard } from '../components/ProductCard';
+import { platinum } from '../constant/ColorCodes';
+import  Button  from '../components/Buttons';
 
 const Cart = () => {
   const { Productsjson,rupees,cartItems,} = useContext(BagContext);
   const [cartData,setCartData ]= useState([]);
+  const [cartTotAmount,setCartTotAmount]=useState(0);
 
 useEffect(() => {
+  setCartTotAmount(0)
   if (!cartItems || !Productsjson) return;
 
-  const tempdata = Object.entries(cartItems).map(([key, quantity]) => {
+  const tempdata = Object.entries(cartItems).map(([key,value]) => {
     const product = Productsjson.find(p => p.id.toString() === key.toString());
+    
     if (product) {
-      return { ...product, quantity };
+      setCartTotAmount(cartTotAmount=>cartTotAmount+=value.totAmount);
+      return { ...product, quantity:value.count, totAmount:value.totAmount };
     }
     return null;
   }).filter(Boolean); // removes nulls
@@ -39,14 +45,25 @@ useEffect(() => {
 
         {
           cartData.length>0 ?
-            <div className={`${cartData.length>1? 'grid lg:grid-cols-2' : 'grid lg:grid-cols-1'} space-y-3.5 space-x-3.5 place-items-center lg:mt-10 mx-8 max-sm:mx-2 max-sm:mt-20 max-sm:mb-20 md:mt-20 md:mb-20`}>
+          <div>
+            <div className='flex justify-center items-center max-sm:mt-20 md:mt-20 lg:mt-10'>
+                <h1 className={`font-bold `}>Tot Amount : ₹ {cartTotAmount}</h1>
+            </div>
+            <div className={`${cartData.length>1? 'grid lg:grid-cols-2' : 'grid lg:grid-cols-1'} space-y-3.5 space-x-3.5 place-items-center lg:mt-5 mx-8 max-sm:mx-2 max-sm:mt-5 max-sm:mb-20 md:mt-5 md:mb-20`}>
               {
                 cartData.map((value)=>(
-                  <FavouriteProductCard key={value.id} product={{id:value.id,title:value.title,description:value.description,price:value.price,images:value.image,quantity:value.quantity}}></FavouriteProductCard>
+                  <CartProductCard key={value.id} product={{id:value.id,title:value.title,description:value.description,price:value.price,images:value.image,quantity:value.quantity}}></CartProductCard>
                 ))
               }
             </div>
-          :  <div className='flex justify-center items-center text-amber-700 font-bold text-3xl max-sm:mt-20'>
+            <div className='fixed w-full lg:bottom-0 max-sm:bottom-15 md:bottom-15 flex justify-center items-center'>
+              <div>
+                <Button text={"Order Now"} className={`bg-black rounded-lg text-white w-150 p-2 mb-2 text-center max-sm:w-100`}/>
+              </div>
+            </div>
+          </div>
+            
+          :  <div className='flex justify-center items-center text-amber-700 font-bold text-3xl max-sm:mt-20 md:mt-20'>
                 <span >Your Cart Is Empty </span>
               </div>
         }

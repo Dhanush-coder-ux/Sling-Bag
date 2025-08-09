@@ -13,7 +13,7 @@ export default function KnowUsPage() {
         { isMobile ? <MobileAppBar  appbarTitle={"Know Us"}  withBackArrow={false}></MobileAppBar> : <NavBar/>}
     
     {/* Know us contents */}
-    <div className='flex flex-row justify-center items-center max-sm:mt-20 max-sm:mb-20 mt-10 '>
+    <div className='flex flex-row justify-center items-center max-sm:mt-20 max-sm:mb-20 lg:mt-5 lg:mb-0 md:mt-15 md:mb-15'>
         <div className='grid grid-cols-1 w-200'>
 
             {/* our story content */}

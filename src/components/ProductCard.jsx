@@ -30,7 +30,7 @@ export const ProductCard = ({id,title,description,price,images}) => {
 }
 
 
-export const FavouriteProductCard=({product:{id,title,description,quantity,price,images}})=>{
+export const CartProductCard=({product:{id,title,description,quantity,price,images}})=>{
     
     return (
         <NavLink to={`/product/${id}`}>

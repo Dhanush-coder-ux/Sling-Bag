@@ -55,7 +55,7 @@ const toggle = (value) => {
       )}
 
       {/* Filters */}
-      <div className="flex mt-10 mx-8 max-sm:mx-2 max-sm:mt-15 md:mt-20">
+      <div className="flex mt-5 mx-8 max-sm:mx-2 max-sm:mt-15 max-md:mt-10">
         <h1 className="text-2xl font-semibold max-sm:text-sm">Filters</h1>
       </div>
 

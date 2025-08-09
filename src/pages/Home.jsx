@@ -6,7 +6,7 @@ import ProductSlide from '../components/ProductSlide'
 
 const Home = () => {
   return (
-    <div>
+    <div className='max-sm:mb-20'>
         <NavBar/>
         {/* Hero Section */}
         <Hero/>

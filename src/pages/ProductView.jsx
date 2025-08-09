@@ -8,12 +8,13 @@ import Button, { BlackBgButton, GrayBgButton} from '../components/Buttons';
 import { BagContext } from '../context/BagContext';
 import { Counter } from '../components/Counter';
 import { platinum } from '../constant/ColorCodes';
+import { Productsjson } from '../constant';
 
 const ProductView = () => {
     
    
     const { productId } = useParams();
-    const {Productsjson , addToCart } = useContext(BagContext)
+
     const productInfo=Productsjson.find(p=>p.id.toString()==productId.toString())
 
     return (
@@ -44,8 +45,8 @@ const ProductView = () => {
                   </div>
               </div>
               <div className='mt-5 max-sm:px-2 flex justify-between items-end gap-4 w-150 max-sm:w-full text-center'>
-                      <Counter productId={productId} className={'p-1'}></Counter>
-                      <Button text={"Customize"} className={`bg-[${platinum}] rounded-lg text-black w-50 p-2 mb-2 text-center`}/>
+                  <Counter productId={productId} className={'p-1'} productPrice={productInfo.price}></Counter>
+                  <Button text={"Customize"} className={`bg-[${platinum}] rounded-lg text-black w-50 p-2 mb-2 text-center`}/>
               </div>
 
             </div>

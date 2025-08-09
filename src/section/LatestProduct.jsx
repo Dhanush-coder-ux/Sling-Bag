@@ -13,8 +13,8 @@ const LatestProduct = () => {
   const {Productsjson} = useContext(BagContext)
   return (
     <div>
-      <div className='text-center py-8 text-4xl  '>
-        <Title text1={'Fresh'} text2={'Finds'} divClassName={"mb-4"}/>
+      <div className='text-center my-10 text-4xl'>
+        <Title text1={'Fresh'} text2={'Finds'} divClassName={"mb-5"}/>
                <hr className="w-full border-none h-[1.5px] bg-gray-400 " />
       </div>
         <ScrollArea className="w-full rounded-md my-10 py-5 border whitespace-nowrap">
