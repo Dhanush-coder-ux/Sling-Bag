@@ -1,92 +1,59 @@
 import { MobileAppBar } from '../section/MobileAppBar';
 import Title from '../components/Title';
-import { BagContext } from '../context/BagContext';
-import React, { useContext, useEffect, useState } from 'react';
+import { BagContext } from '../context/BagContext'
+import React, { useContext, useEffect, useState } from 'react'
 import NavBar from '../section/NavBar';
-import { isMobile } from 'react-device-detect';
+import { isDesktop, isMobile } from 'react-device-detect';
 import { Link } from 'react-router-dom';
+import { FavouriteProductCard } from '../components/ProductCard';
 
 const Cart = () => {
-  const { Productsjson, rupees, cartItems } = useContext(BagContext);
-  const [cartData, setCartData] = useState([]);
+  const { Productsjson,rupees,cartItems,} = useContext(BagContext);
+  const [cartData,setCartData ]= useState([]);
 
-  useEffect(() => {
-    if (!cartItems || !Productsjson) return;
+useEffect(() => {
+  if (!cartItems || !Productsjson) return;
 
-    const tempdata = Object.entries(cartItems)
-      .map(([key, quantity]) => {
-        const product = Productsjson.find(
-          (p) => p.id.toString() === key.toString()
-        );
-        if (product) {
-          return { ...product, quantity };
-        }
-        return null;
-      })
-      .filter(Boolean);
+  const tempdata = Object.entries(cartItems).map(([key, quantity]) => {
+    const product = Productsjson.find(p => p.id.toString() === key.toString());
+    if (product) {
+      return { ...product, quantity };
+    }
+    return null;
+  }).filter(Boolean); // removes nulls
 
-    setCartData(tempdata);
-  }, [cartItems, Productsjson]);
+  console.log('tempdata:', tempdata);
+  setCartData(tempdata);
+}, [cartItems, Productsjson]);
 
   return (
     <>
-      {isMobile ? (
-        <MobileAppBar appbarTitle={'Cart'} />
-      ) : (
-        <NavBar />
-      )}
+      { isMobile ? <MobileAppBar  appbarTitle={"Cart"}   ></MobileAppBar> : <NavBar/>}
+      <div className='lg:pt-5 '>
+        {
+          isDesktop &&
+          <div className='flex justify-center items-center mb-10'>
+            <Title text1={'Your'} text2={'Cart'} text1ClassName={"font-bold text-[30px]"} text2ClassName={"font-bold"} />
+          </div>
+        }
 
-      <div className="pt-10 flex flex-col h-screen">
-        {/* Title */}
-        <div className="flex justify-center items-center mt-8 mb-4">
-          <Title
-            text1={'Your'}
-            text2={'Cart'}
-            text1ClassName={'font-bold text-[30px]'}
-            text2ClassName={'font-bold'}
-          />
-        </div>
-
-        {/* Scrollable container */}
-        <div className="flex-1 overflow-y-auto px-2 pb-24">
-          {cartData.map((item, index) => (
-            <div
-              key={index}
-              className="flex justify-between items-center w-full p-4 border-b border-gray-300"
-            >
-              <div className="flex items-center gap-4">
-                <Link to={`/product/${item.id}`}>
-                  <img
-                    src={item.image[0]}
-                    alt={item.title}
-                    className="w-20 h-20 object-cover"
-                  />
-                </Link>
-                <div>
-                  <h3 className="text-lg font-semibold">{item.title}</h3>
-                  <p className="text-gray-600 py-3">
-                    Price: {item.price}
-                  </p>
-                  <p className="text-gray-600">
-                    Quantity: {item.quantity}
-                  </p>
-                </div>
-              </div>
-              <div className="text-lg font-bold">
-                <img
-                  src="/icons/delete.svg"
-                  width={30}
-                  height={30}
-                  className="cursor-pointer"
-                  alt=""
-                />
-              </div>
+        {
+          cartData.length>0 ?
+            <div className={`${cartData.length>1? 'grid lg:grid-cols-2' : 'grid lg:grid-cols-1'} space-y-3.5 space-x-3.5 place-items-center lg:mt-10 mx-8 max-sm:mx-2 max-sm:mt-20 max-sm:mb-20 md:mt-20 md:mb-20`}>
+              {
+                cartData.map((value)=>(
+                  <FavouriteProductCard key={value.id} product={{id:value.id,title:value.title,description:value.description,price:value.price,images:value.image,quantity:value.quantity}}></FavouriteProductCard>
+                ))
+              }
             </div>
-          ))}
-        </div>
+          :  <div className='flex justify-center items-center text-amber-700 font-bold text-3xl max-sm:mt-20'>
+                <span >Your Cart Is Empty </span>
+              </div>
+        }
       </div>
     </>
-  );
-};
+ 
+  )
+}
 
-export default Cart;
+export default Cart

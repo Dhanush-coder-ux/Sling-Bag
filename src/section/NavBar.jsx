@@ -7,6 +7,8 @@ import { BagContext } from "../context/BagContext"
 
 const NavBar = () => {
   const {getCartCount} = useContext(BagContext)
+
+  const count=getCartCount();
   return (
     <div >
        <div className="navbar">
@@ -40,7 +42,7 @@ const NavBar = () => {
           
         <NavLink  className={'relative sm:flex hidden '} to={'/cart'} >
           <img src="/icons/carts.svg" width={30} height={30} alt="" />
-          <p className="absolute right-[-5px] bottom-[-5px] w-4 text-center leading-4 bg-red-600 aspect-square rounded-full text-white text-[8px]">{getCartCount()}</p>
+          <p className="absolute right-[-5px] bottom-[-5px] w-4 text-center leading-4 bg-red-600 aspect-square rounded-full text-white text-[8px]">{count>99 ? "99+" : count}</p>
         </NavLink>
        
         </div>
