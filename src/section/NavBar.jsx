@@ -32,6 +32,10 @@ const NavBar = () => {
              Know Us
             <hr className="w-2/4 border-none h-[2px] bg-black hidden" />
         </NavLink>
+        <NavLink  className={'flex flex-col items-center'} to={'/orders'} >
+             Orders
+            <hr className="w-2/4 border-none h-[2px] bg-black hidden" />
+        </NavLink>
 
 
       </div>

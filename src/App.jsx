@@ -9,6 +9,7 @@ import { BottomAppBar } from './section/BottomAppBar'
 import ProductView from './pages/ProductView'
 
 import KnowUsPage from './pages/KnowUs'
+import Orders from './pages/Orders'
 
 
 
@@ -23,7 +24,7 @@ function App() {
       <Route path='/collections' element={<ProductsPage/>} />
       <Route path='/cart' element={<Cart/>}/>
       <Route path='/product/:productId' element={<ProductView/>} />
-      
+      <Route path='/orders' element={<Orders/>} />
       <Route path='/know-us' element={<KnowUsPage/>}/>
     </Routes>
     { isMobile && <BottomAppBar></BottomAppBar>}

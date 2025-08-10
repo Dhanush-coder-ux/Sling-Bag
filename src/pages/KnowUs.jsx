@@ -5,16 +5,18 @@ import { isMobile } from 'react-device-detect'
 import Title from '../components/Title'
 import { GrayBgButton } from '../components/Buttons'
 import { ourStory, ourWork, ourWorkImageUrl } from '../constant'
+import Orders from './Orders'
 
 export default function KnowUsPage() {
   return (
     <>
     {/* for crossplatform appbar */}
         { isMobile ? <MobileAppBar  appbarTitle={"Know Us"}  withBackArrow={false}></MobileAppBar> : <NavBar/>}
-    
+ 
     {/* Know us contents */}
     <div className='flex flex-row justify-center items-center max-sm:mt-20 max-sm:mb-20 lg:mt-5 lg:mb-0 md:mt-15 md:mb-15'>
         <div className='grid grid-cols-1 w-200'>
+            
 
             {/* our story content */}
             <div className='flex flex-col justify-center items-center align-middle'>

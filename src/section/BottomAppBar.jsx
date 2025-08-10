@@ -10,7 +10,8 @@ export function BottomAppBar() {
         {label:'Home',icon:"/icons/home.svg",route:'/',canShowBadge:false},
         {label:'Products',icon:"/icons/product.svg",route:'/collections',canShowBadge:false},
         {label:'Cart',icon:"/icons/cart.svg",route:'/cart',canShowBadge:true,badgeCount:getCartCount()},
-        {label:'Know us',icon:"/icons/about.svg",route:'/know-us',canShowBadge:false}
+        {label:'Know us',icon:"/icons/about.svg",route:'/know-us',canShowBadge:false},
+         {label:'Orders',icon:"/icons/orders.svg",route:'/orders',canShowBadge:false}
     ];
     
     return (
