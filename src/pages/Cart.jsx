@@ -4,10 +4,11 @@ import { BagContext } from '../context/BagContext'
 import React, { useContext, useEffect, useState } from 'react'
 import NavBar from '../section/NavBar';
 import { isDesktop, isMobile } from 'react-device-detect';
-import { Link } from 'react-router-dom';
+
 import { CartProductCard } from '../components/ProductCard';
-import { platinum } from '../constant/ColorCodes';
+
 import  Button  from '../components/Buttons';
+
 
 const Cart = () => {
   const { Productsjson,rupees,cartItems,} = useContext(BagContext);
@@ -48,6 +49,7 @@ useEffect(() => {
           <div>
             <div className='flex justify-center items-center max-sm:mt-20 md:mt-20 lg:mt-10'>
                 <h1 className={`font-bold `}>Tot Amount : ₹ {cartTotAmount}</h1>
+                
             </div>
             <div className={`${cartData.length>1? 'grid lg:grid-cols-2' : 'grid lg:grid-cols-1'} space-y-3.5 space-x-3.5 place-items-center lg:mt-5 mx-8 max-sm:mx-2 max-sm:mt-5 max-sm:mb-20 md:mt-5 md:mb-20`}>
               {

@@ -46,7 +46,7 @@ const ProductView = () => {
               </div>
               <div className='mt-5 max-sm:px-2 flex justify-between items-end gap-4 w-150 max-sm:w-full text-center'>
                   <Counter productId={productId} className={'p-1'} productPrice={productInfo.price}></Counter>
-                  <Button text={"Customize"} className={`bg-[${platinum}] rounded-lg text-black w-50 p-2 mb-2 text-center`}/>
+                  <Button text={"Buy Now"} className={`bg-[${platinum}] rounded-lg text-black w-50 p-2 mb-2 text-center`}/>
               </div>
 
             </div>
