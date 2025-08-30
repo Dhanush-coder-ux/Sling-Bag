@@ -1,12 +1,13 @@
 import { createContext, useEffect, useState } from "react"
 import { Productsjson } from "../constant"
+import { useNavigate } from "react-router-dom";
 
 export const BagContext = createContext()
 
  
 const BagContextProvider = (props) => {
   const [cartItems, setCartItems] = useState({});
-
+    const navigate = useNavigate()
     const rupees = '₹'
     const addToCart = async (productId,productPrice) => {
       let cartData = structuredClone(cartItems);
@@ -53,7 +54,9 @@ const BagContextProvider = (props) => {
 
 
     const value ={
-        Productsjson,rupees,cartItems, setCartItems,addToCart,getCartCount,getCartInfoById,removeToCart
+        Productsjson,rupees,cartItems, 
+        setCartItems,addToCart,getCartCount,
+        getCartInfoById,removeToCart,navigate
     }
 
   return (

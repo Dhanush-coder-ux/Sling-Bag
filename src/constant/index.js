@@ -8,7 +8,7 @@ export const Productsjson =[
     "title": "Leather Handbag",
     "description": "Premium leather handbag for everyday use. Premium leather handbag for everyday use.Premium leather handbag for everyday use.Premium leather handbag for everyday use.Premium leather handbag for everyday use.Premium leather handbag for everyday use.Premium leather handbag for everyday use.Premium leather handbag for everyday use.Premium leather handbag for everyday use.Premium leather handbag for everyday use.Premium leather handbag for everyday use.Premium leather handbag for everyday use.Premium leather handbag for everyday use.",
     "price": 2499,
-    "isFav": false,
+  
     "category":"women",
     "image": [
       "/images/bag.png",

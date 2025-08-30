@@ -11,7 +11,7 @@ import  Button  from '../components/Buttons';
 
 
 const Cart = () => {
-  const { Productsjson,rupees,cartItems,} = useContext(BagContext);
+  const { Productsjson,rupees,cartItems,navigate} = useContext(BagContext);
   const [cartData,setCartData ]= useState([]);
   const [cartTotAmount,setCartTotAmount]=useState(0);
 
@@ -48,9 +48,13 @@ useEffect(() => {
           cartData.length>0 ?
           <div>
             <div className='flex justify-center items-center max-sm:mt-20 md:mt-20 lg:mt-10'>
-                <h1 className={`font-bold `}>Tot Amount : ₹ {cartTotAmount}</h1>
+                <h1 className={`font-bold `}>Tot Amount : {rupees} {cartTotAmount}</h1>
                 
             </div>
+            <div className=' w-full flex justify-center items-center  max-sm:mt-20 md:mt-20 lg:mt-10'>
+              <Button text={'Proceed To CheckOut'} className={`bg-black rounded-lg text-white w-150 p-2 mb-2 text-center max-sm:w-100`} onClick={()=>navigate('/place-order')} />
+            </div>
+            
             <div className={`${cartData.length>1? 'grid lg:grid-cols-2' : 'grid lg:grid-cols-1'} space-y-3.5 space-x-3.5 place-items-center lg:mt-5 mx-8 max-sm:mx-2 max-sm:mt-5 max-sm:mb-20 md:mt-5 md:mb-20`}>
               {
                 cartData.map((value)=>(
