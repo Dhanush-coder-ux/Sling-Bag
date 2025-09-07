@@ -110,36 +110,9 @@ const PlaceOrder = () => {
               <Title text1={"DELIVERY"} text2={"INFO"} text1ClassName={"font-bold text-[30px]"} text2ClassName={"font-bold"}/>
           </div>
 
-          <div className='flex gap-4'>
-          <input
-            onChange={onchangehandler}
-            name='firstname'
-            value={formData.firstname}
-            type="text"
-            className='border border-gray-300 rounded py-1.5 px-3.5 w-full'
-            placeholder='First name'
-            required
-          />
-          <input
-            onChange={onchangehandler}
-            name='lastname'
-            value={formData.lastname}
-            type="text"
-            className='border border-gray-300 rounded py-1.5 px-3.5 w-full'
-            placeholder='Last name'
-            required
-          />
-        </div>
+         
 
-        <input
-          onChange={onchangehandler}
-          name='email'
-          value={formData.email}
-          type="email"
-          className='border border-gray-300 rounded py-1.5 px-3.5'
-          placeholder='Email Address'
-          required
-        />
+
 
         <input
           onChange={onchangehandler}

@@ -14,8 +14,11 @@ const ProductView = () => {
     
    
     const { productId } = useParams();
+    const  {products } = useContext(BagContext);
 
-    const productInfo=Productsjson.find(p=>p.id.toString()==productId.toString())
+    const productInfo=products.find(p=>p.id.toString()==productId.toString())
+    console.log("khbwjhb",productInfo);
+    
 
     return (
       <>
@@ -28,7 +31,7 @@ const ProductView = () => {
             <div className='flex flex-col text-center justify-center items-center'>
 
               <div className='w-80 p-5 mt-0 lg:w-150'>
-                <ProductSlide image={productInfo.image}/>
+                <ProductSlide image={productInfo.image_urls}/>
               </div>
 
               <div className='flex justify-start items-start w-150 max-sm:w-full max-sm:px-3'>

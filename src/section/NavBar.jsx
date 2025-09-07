@@ -2,11 +2,31 @@ import { Link, NavLink } from "react-router-dom"
 import Button from "../components/Buttons"
 import { useContext } from "react"
 import { BagContext } from "../context/BagContext"
+import axios from "axios"
 
 
 
 const NavBar = () => {
-  const {getCartCount} = useContext(BagContext)
+  const {getCartCount,navigate} = useContext(BagContext)
+  const backend_url = import.meta.env.VITE_BACKEND_URL;
+
+
+    const handleSignIn = async () => {
+    try {
+      // optional API check
+    const link=await axios.get(`${backend_url}/auth/user`,
+      
+    );
+      // ✅ after success, redirect
+      window.open(link.data, "_self");
+      console.log(link.data,link.headers);
+      
+    } catch (err) {
+      console.error("Error checking user:", err);
+    
+    }
+  };
+  
 
   const count=getCartCount();
   return (
@@ -51,7 +71,7 @@ const NavBar = () => {
        
         </div>
           <div>
-             <Button text={'Sign-in'} className="bg-black px-6 py-3"/>
+             <Button text={'Sign-in'} onClick={handleSignIn} className="bg-black px-6 py-3"/>
           </div>
             
         </div>

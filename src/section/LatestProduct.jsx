@@ -10,7 +10,7 @@ import { BagContext } from '../context/BagContext'
 
 
 const LatestProduct = () => {
-  const {Productsjson} = useContext(BagContext)
+  const {products} = useContext(BagContext)
   return (
     <div>
       <div className='text-center my-10 text-4xl'>
@@ -19,7 +19,7 @@ const LatestProduct = () => {
       </div>
         <ScrollArea className="w-full rounded-md my-10 py-5 border whitespace-nowrap">
       <div className="flex w-max space-x-4 py-4">
-        {Productsjson.map(({id, image,title,price}) => (
+        {products.map(({id, image,title,price}) => (
           <Link to={`/product/${id}`} key={id} className="shrink-0 mx-8 w-[200px]">
             <div className="overflow-hidden rounded-md">
               <img

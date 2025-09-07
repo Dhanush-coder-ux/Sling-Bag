@@ -6,23 +6,24 @@ import NavBar from '../section/NavBar';
 import { BagContext } from '../context/BagContext';
 import { chips } from '../constant';
 import { Chip } from '../components/Chip';
+import axios from 'axios';
 
 export const ProductsPage = () => {
-  const { Productsjson } = useContext(BagContext);
+  
+
   const [category, setCategory] = useState([]);
   const [filterproduct, setFilterProduct] = useState([]);
   const [loading, setLoading] = useState(true);
   const [selectedChipText,setChipClicked]=useState("All");
 
-  // Initial load
-  useEffect(() => {
-    setLoading(true);
-    const timeout = setTimeout(() => {
-      setFilterProduct(Productsjson);
-      setLoading(false);
-    }, 500);
-    return () => clearTimeout(timeout);
-  }, [Productsjson]);
+  const { products, getProducts } = useContext(BagContext);
+
+      useEffect(() => {
+        getProducts({setFilterProduct,setLoading});
+      }, []);
+
+
+  
 
 
   // Toggle category filter
@@ -30,17 +31,17 @@ const toggle = (value) => {
 
   if (value === "All") {
     
-    setFilterProduct(Productsjson)
-     // clear all filters
+    setFilterProduct(products)
+    
     return 
     
   }
   if (value=="low to high") {
-    setFilterProduct(Productsjson.sort((a, b) => a.price - b.price));
+    setFilterProduct(products.sort((a, b) => a.price - b.price));
   } else if (value=="high to low") {
-    setFilterProduct(Productsjson.sort((a, b) => b.price - a.price));
+    setFilterProduct(products.sort((a, b) => b.price - a.price));
   }else{
-    setFilterProduct(Productsjson.filter((item)=>item['category']==value))
+    setFilterProduct(products.filter((item)=>item['category']==value))
   }
 };
 
@@ -74,9 +75,9 @@ const toggle = (value) => {
 
       {/* Products */}
       <div className="grid lg:grid-cols-4 max-sm:grid-cols-2 max-sm:mb-20 gap-4 mt-8 mx-2 md:mx-8 md:grid-cols-2 md:mb-20">
-        {loading ? (
-          <p>Loading...</p>
-        ) : (
+        { loading ? (
+          <div className='text-3xl font-bold text-center col-span-4'>Loading...</div>
+        ) :
           filterproduct.map((item, index) => (
             <ProductCard
               key={index}
@@ -84,10 +85,11 @@ const toggle = (value) => {
               title={item.title}
               description={item.description}
               price={item.price}
-              images={item.image}
+              images={item.image_urls}
+              
             />
           ))
-        )}
+        }
       </div>
     </>
   );

@@ -2,6 +2,10 @@ import NavBar from '../section/NavBar'
 import Hero from '../section/Hero'
 import LatestProduct from '../section/LatestProduct'
 import ProductSlide from '../components/ProductSlide'
+import { useContext, useEffect } from 'react'
+import { BagContext } from '../context/BagContext'
+
+
 
 
 const Home = () => {

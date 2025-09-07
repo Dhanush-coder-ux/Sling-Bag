@@ -10,6 +10,8 @@ import ProductView from './pages/ProductView'
 import KnowUsPage from './pages/KnowUs'
 import Orders from './pages/Orders'
 import PlaceOrder from './pages/PlaceOrder'
+import { useEffect } from 'react'
+import axios from 'axios'
 
 
 

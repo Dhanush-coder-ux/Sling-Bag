@@ -1,9 +1,12 @@
 
+import { BagContext } from "../context/BagContext";
+import { useContext } from "react";
 import { NavLink } from "react-router-dom";
 
 
 
 export const ProductCard = ({id,title,description,price,images}) => {
+    const { rupees} = useContext(BagContext)
    
     
     return (
@@ -19,7 +22,7 @@ export const ProductCard = ({id,title,description,price,images}) => {
                     </div>
                 
                     <div className="flex items-center justify-between">
-                        <span className="text-3xl max-sm:text-xl  font-bold py-4 max-sm:py-2  dark:text-white line-clamp-1">{`₹ ${price}`}</span>
+                        <span className="text-3xl max-sm:text-xl  font-bold py-4 max-sm:py-2  dark:text-white line-clamp-1">{`${rupees} ${price}`}</span>
            
                     </div>
                 </div>
@@ -35,7 +38,7 @@ export const CartProductCard=({product:{id,title,description,quantity,price,imag
     return (
        
             <div>
-                <a href="#" className="flex bg-white border border-gray-200 rounded-lg shadow-sm flex-row max-w-xl hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700  max-sm:h-40 w-200 max-sm:w-auto">
+                <div className="flex bg-white border border-gray-200 rounded-lg shadow-sm flex-row max-w-xl hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700  max-sm:h-40 w-200 max-sm:w-auto">
                 
                      <NavLink to={`/product/${id}`}><img className="object-cover rounded-lg h-auto w-40  my-5 mx-2 max-sm:h-30 max-sm:w-30" src={images[0]} alt=""/></NavLink>
                     <div className="flex flex-col justify-between p-4 leading-normal w-full">
@@ -47,7 +50,7 @@ export const CartProductCard=({product:{id,title,description,quantity,price,imag
                     <div className='text-lg font-bold flex px-4 justify-center items-center'>
                         <img src="/icons/delete.svg" className='cursor-pointer h-15 w-15' alt="" />
                     </div>
-                </a>
+                </div>
             </div>
    
         
