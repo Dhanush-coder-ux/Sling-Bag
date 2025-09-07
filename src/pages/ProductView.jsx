@@ -1,6 +1,6 @@
 import { MobileAppBar } from '../section/MobileAppBar';
 import ProductSlide from '../components/ProductSlide';
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { useParams, useLocation } from 'react-router-dom'
 import { isMobile } from 'react-device-detect';
 import NavBar from '../section/NavBar';
@@ -14,10 +14,15 @@ const ProductView = () => {
     
    
     const { productId } = useParams();
-    const  {products } = useContext(BagContext);
+    const  {products,addToCartLocally} = useContext(BagContext);
+    console.log("products : products :",products);
+    
+    const productInfo=products.find((p)=>p.id?.toString()==productId.toString() || p.product_id?.toString()==productId.toString());
+    console.log("Product Info",productInfo);
 
-    const productInfo=products.find(p=>p.id.toString()==productId.toString())
-    console.log("khbwjhb",productInfo);
+    useEffect(()=>{
+     addToCartLocally(productId,productInfo.cart_quantity || productInfo.quantity);
+    },[])
     
 
     return (

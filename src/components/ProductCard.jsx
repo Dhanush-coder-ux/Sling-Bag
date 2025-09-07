@@ -1,13 +1,12 @@
 
 import { BagContext } from "../context/BagContext";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 
 
 
 export const ProductCard = ({id,title,description,price,images}) => {
-    const { rupees} = useContext(BagContext)
-   
+    const {rupees,addToCart} = useContext(BagContext)
     
     return (
         <NavLink to={`/product/${id}`} >

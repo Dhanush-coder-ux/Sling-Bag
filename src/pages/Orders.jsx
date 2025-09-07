@@ -17,7 +17,7 @@ const Orders = () => {
 
         <div className='mt-20 mx-10 max-sm:mx-6'>
              <Title text1={'My'} text2={'Orders'}  text1ClassName={"font-bold text-[30px]"} text2ClassName={"font-bold"} divClassName={"mb-0"} />
-          {Productsjson.map((item, index) => (
+          {Productsjson?.map((item, index) => (
             <div key={index} className='py-4 border-t border-b text-gray-700 flex flex-col sm:flex-row md:items-center justify-between gap-4'>
               <div className='flex items-start text-sm'>
             

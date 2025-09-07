@@ -1,14 +1,15 @@
 import { Link, NavLink } from "react-router-dom"
 import Button from "../components/Buttons"
-import { useContext } from "react"
+import { useContext, useEffect, useState } from "react"
 import { BagContext } from "../context/BagContext"
 import axios from "axios"
 
 
 
 const NavBar = () => {
-  const {getCartCount,navigate} = useContext(BagContext)
+  const {getCartCount,navigate,fetchCartCount} = useContext(BagContext)
   const backend_url = import.meta.env.VITE_BACKEND_URL;
+
 
 
     const handleSignIn = async () => {
@@ -27,8 +28,11 @@ const NavBar = () => {
     }
   };
   
-
+  useEffect(()=>{
+    fetchCartCount();
+  },[])
   const count=getCartCount();
+
   return (
     <div >
        <div className="navbar">
