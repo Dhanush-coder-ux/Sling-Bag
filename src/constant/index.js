@@ -8,7 +8,7 @@ export const Productsjson =[
     "title": "Leather Handbag",
     "description": "Premium leather handbag for everyday use. Premium leather handbag for everyday use.Premium leather handbag for everyday use.Premium leather handbag for everyday use.Premium leather handbag for everyday use.Premium leather handbag for everyday use.Premium leather handbag for everyday use.Premium leather handbag for everyday use.Premium leather handbag for everyday use.Premium leather handbag for everyday use.Premium leather handbag for everyday use.Premium leather handbag for everyday use.Premium leather handbag for everyday use.",
     "price": 2499,
-  
+    'cart_quantity':2,
     "category":"women",
     "image": [
       "/images/bag.png",
@@ -21,7 +21,7 @@ export const Productsjson =[
     "title": "Canvas Backpack Canvas Backpack Canvas Backpack Canvas Backpack",
     "description": "Stylish and durable backpack for school or travel.",
     "price": 1899,
-    "isFav": true,
+    "cart_quantity":2,
      "category":"men",
     "image": [
       "/images/bag.png",
@@ -34,7 +34,7 @@ export const Productsjson =[
     "title": "Laptop Sleeve",
     "description": "Slim protective sleeve for laptops up to 15 inches.",
     "price": 999999990,
-    "isFav": false,
+    "cart_quantity":2,
      "category":"men",
     "image": [
       "/images/bag.png",
@@ -47,7 +47,7 @@ export const Productsjson =[
     "title": "Travel Duffel",
     "description": "Spacious duffel bag perfect for short trips.",
     "price": 2999,
-    "isFav": true,
+    "cart_quantity":2,
      "category":"men",
     "image": [
       "/images/bag.png",
@@ -60,7 +60,7 @@ export const Productsjson =[
     "title": "Messenger Bag",
     "description": "Classic crossbody bag with multiple compartments.",
     "price": 2199,
-    "isFav": false,
+    "cart_quantity":0,
      "category":"men",
     "image": [
       "/images/bag.png",
@@ -73,7 +73,7 @@ export const Productsjson =[
     "title": "Mini Sling Bag",
     "description": "Compact sling bag for essentials on the go.",
     "price": 799,
-    "isFav": true,
+    "cart_quantity":2,
      "category":"men",
     "image": [
       "/images/bag.png",
@@ -86,7 +86,7 @@ export const Productsjson =[
     "title": "Gym Bag",
     "description": "Water-resistant gym bag with shoe compartment.",
     "price": 1599,
-    "isFav": false,
+    "cart_quantity":2,
      "category":"men",
     "image": [
       "/images/bag.png",
@@ -99,7 +99,7 @@ export const Productsjson =[
     "title": "Tote Bag",
     "description": "Eco-friendly tote bag made from recycled materials.",
     "price": 499,
-    "isFav": true,
+    "cart_quantity":2,
      "category":"men",
     "image": [
       "/images/bag.png",
@@ -112,7 +112,7 @@ export const Productsjson =[
     "title": "Camera Bag",
     "description": "Shockproof bag designed for DSLR and accessories.",
     "price": 2799,
-    "isFav": false,
+    "cart_quantity":4,
      "category":"men",
     "image": [
       "/images/bag.png",
@@ -125,7 +125,7 @@ export const Productsjson =[
     "title": "Kids School Bag",
     "description": "Colorful school bag for children aged 5-10.",
     "price": 1399,
-    "isFav": true,
+    "cart_quantity":2,
      "category":"men",
     "image": [
       "/images/bag.png",

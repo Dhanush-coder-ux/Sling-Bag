@@ -14,6 +14,7 @@ const Cart = () => {
   const { rupees,navigate,getCart,getCartCount,cartItems,addToCart} = useContext(BagContext);
   const [cartData,setCartData ]= useState([]);
   const [cartTotAmount,setCartTotAmount]=useState(0);
+  const [isLoading,setLoading]=useState(true);
   const totalAmount = cartData.reduce((sum, p) => sum + (p.total_price || 0), 0);
   const totalQuantity= cartData.reduce((sum, p) => sum + (p.quantity || 0), 0);
 
@@ -21,7 +22,7 @@ useEffect(() => {
   
   setCartTotAmount(0)
   
-  getCart({setCartData});
+  getCart({setCartData,setLoading});
 
 
 
@@ -39,7 +40,11 @@ useEffect(() => {
         }
 
         {
-          cartData.length>0 ?
+          isLoading ? 
+          <div className='flex justify-center items-center text-black font-bold text-3xl max-sm:mt-20 md:mt-20'>
+                <span >Loading...</span>
+          </div>
+          : cartData.length>0 ?
           <div>
             <div className='flex justify-center items-center max-sm:mt-20 md:mt-20 lg:mt-10'>
                 <h1 className={`font-bold `}>Tot Amount : {rupees} {totalAmount}</h1>

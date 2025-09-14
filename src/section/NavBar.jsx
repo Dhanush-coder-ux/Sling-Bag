@@ -5,14 +5,8 @@ import { BagContext } from "../context/BagContext"
 import axios from "axios"
 
 
-
-const NavBar = () => {
-  const {getCartCount,navigate,fetchCartCount} = useContext(BagContext)
-  const backend_url = import.meta.env.VITE_BACKEND_URL;
-
-
-
-    const handleSignIn = async () => {
+const backend_url = import.meta.env.VITE_BACKEND_URL;
+export const handleSignIn = async () => {
     try {
       // optional API check
     const link=await axios.get(`${backend_url}/auth/user`,
@@ -26,7 +20,17 @@ const NavBar = () => {
       console.error("Error checking user:", err);
     
     }
-  };
+};
+
+
+const NavBar = () => {
+  const {getCartCount,navigate,fetchCartCount,getBtnName} = useContext(BagContext)
+  const btn=getBtnName();
+  
+
+
+
+  
   
   useEffect(()=>{
     fetchCartCount();
@@ -75,7 +79,7 @@ const NavBar = () => {
        
         </div>
           <div>
-             <Button text={'Sign-in'} onClick={handleSignIn} className="bg-black px-6 py-3"/>
+             <Button text={btn.name} onClick={btn.func} className="bg-black px-6 py-3"/>
           </div>
             
         </div>

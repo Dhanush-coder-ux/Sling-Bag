@@ -1,6 +1,8 @@
 import { createContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { handleSignIn } from "../section/NavBar";
+import { NetworkCalls } from "../components/Network";
 
 export const BagContext = createContext();
 
@@ -8,6 +10,7 @@ const BagContextProvider = (props) => {
   const [cartItems, setCartItems] = useState({});
   const [products, setProducts] = useState([]); 
   const [cartCount,setCartCount]=useState(0); 
+  const [buttonName,setBtnName]=useState({'name':"Sign-In",'func':handleSignIn})
   
 
   const navigate = useNavigate();
@@ -22,7 +25,7 @@ const BagContextProvider = (props) => {
      
     if (productId) {
       cartData[productId]={'count':quantity || 1};
-      setCartCount(quantity || 1)
+      setCartCount(cartCount+1 || 1)
       setCartItems(cartData);
     }
     
@@ -44,7 +47,7 @@ const BagContextProvider = (props) => {
     await axios.post(`${backend_url}/user/cart`, { product_id: productId,quantity:cartData[productId]?cartData[productId]["count"]-1:0 });
     if (productId) {
       cartData[productId]= {'count':quantity || 0};
-      setCartCount(quantity || 0)
+      setCartCount(cartCount-1 || 0)
       setCartItems(cartData);
     } 
     
@@ -54,10 +57,11 @@ const BagContextProvider = (props) => {
     return cartCount;
   };
 
-  const getCart = async ({setCartData}) => {
+  const getCart = async ({setCartData,setLoading}) => {
     try {
       const res = await axios.get(`${backend_url}/user/cart`);
       console.log(res.data);
+      setLoading(false);
       // setCartItems(res.data.user_carts);
       setCartData(res.data.user_carts);
       setProducts(res.data.user_carts || []);
@@ -69,8 +73,8 @@ const BagContextProvider = (props) => {
   const fetchCartCount = async () => {
     try {
       const res = await axios.get(`${backend_url}/user/cart/count`);
-      console.log(res.data);
-      setCartCount(res.data.cart_count);
+      console.log('response',res);
+      setCartCount(res.cart_count);
     } catch (err) {
       console.error("Error fetching cart count:", err);
     }
@@ -104,6 +108,15 @@ const BagContextProvider = (props) => {
     }
   };
 
+  // ---------------- AUTHENTICATION FUNCTION ----------------
+  const getBtnName=()=>{
+    return buttonName;
+  }
+
+  const updateBtnName=({name,func})=>{
+    setBtnName({'name':name,'func':func});
+  }
+
 
 
   // ---------------- CONTEXT VALUE ----------------
@@ -120,7 +133,9 @@ const BagContextProvider = (props) => {
     getProducts,    
     navigate,
     getCart,
-    fetchCartCount
+    fetchCartCount,
+    getBtnName,
+    updateBtnName
   };
 
   return (
