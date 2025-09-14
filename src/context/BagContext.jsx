@@ -1,4 +1,4 @@
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { handleSignIn } from "../section/NavBar";
@@ -11,6 +11,7 @@ const BagContextProvider = (props) => {
   const [products, setProducts] = useState([]); 
   const [cartCount,setCartCount]=useState(0); 
   const [buttonName,setBtnName]=useState({'name':"Sign-In",'func':handleSignIn})
+  const [latest,setLatest] = useState([])
   
 
   const navigate = useNavigate();
@@ -73,8 +74,8 @@ const BagContextProvider = (props) => {
   const fetchCartCount = async () => {
     try {
       const res = await axios.get(`${backend_url}/user/cart/count`);
-      console.log('response',res);
-      setCartCount(res.cart_count);
+      console.log('response',res.cart_count);
+      setCartCount(res.data.cart_count || 0);
     } catch (err) {
       console.error("Error fetching cart count:", err);
     }
@@ -108,6 +109,22 @@ const BagContextProvider = (props) => {
     }
   };
 
+  const getLatestProducts = async () => {
+    try {
+      const res = await axios.get(`${backend_url}/product?latest=true`);
+      const data = Array.isArray(res.data) ? res.data : res.data.products;
+      setLatest(data || []);
+      console.log(data)
+    } catch (err) {
+      console.error("Error fetching products:", err);
+    } finally{
+      
+    }
+  };
+
+  useEffect(()=>{
+    getLatestProducts();
+  },[])
   // ---------------- AUTHENTICATION FUNCTION ----------------
   const getBtnName=()=>{
     return buttonName;
@@ -135,7 +152,8 @@ const BagContextProvider = (props) => {
     getCart,
     fetchCartCount,
     getBtnName,
-    updateBtnName
+    updateBtnName,
+    latest
   };
 
   return (

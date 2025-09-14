@@ -65,7 +65,7 @@ const Home = () => {
         <NavBar/>
         {/* Hero Section */}
         <Hero/>
-        {/* <LatestProduct/> */}
+        <LatestProduct/>
         
 
     </div>

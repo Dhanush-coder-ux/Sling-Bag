@@ -14,10 +14,13 @@ const ProductView = () => {
     
    
     const { productId } = useParams();
-    const  {products,addToCartLocally} = useContext(BagContext);
-    console.log("products : products :",products);
+    const  {products,latest,addToCartLocally} = useContext(BagContext);
+    console.log("products : products :",products,latest);
     
-    const productInfo=products.find((p)=>p.id?.toString()==productId.toString() || p.product_id?.toString()==productId.toString());
+    var productInfo=products.find((p)=>p.id?.toString()==productId.toString() || p.product_id?.toString()==productId.toString());
+    if (productInfo == [] || productInfo == undefined){
+      productInfo=latest.find((p)=>p.id?.toString()==productId.toString() || p.product_id?.toString()==productId.toString());
+    }
     console.log("Product Info",productInfo);
 
     useEffect(()=>{

@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 
 import { ScrollArea, ScrollBar } from "../components/ui/scroll-area"
 import Title from '../components/Title'
@@ -10,7 +10,10 @@ import { BagContext } from '../context/BagContext'
 
 
 const LatestProduct = () => {
-  const {products} = useContext(BagContext)
+  const {latest} = useContext(BagContext)
+  
+
+
   return (
     <div>
       <div className='text-center my-10 text-4xl'>
@@ -19,11 +22,11 @@ const LatestProduct = () => {
       </div>
         <ScrollArea className="w-full rounded-md my-10 py-5 border whitespace-nowrap">
       <div className="flex w-max space-x-4 py-4">
-        {products.map(({id, image,title,price}) => (
-          <Link to={`/product/${id}`} key={id} className="shrink-0 mx-8 w-[200px]">
+        {latest.map(({id, image_urls,title,price}) => (
+          <Link to={`/product/${id}`} key={id} className="shrink-0  border-gray-400 mx-8 w-[200px]">
             <div className="overflow-hidden rounded-md">
               <img
-                src={image[0]}
+                src={image_urls[0]}
                 className="aspect-[3/4] h-fit w-fit object-cover"
               />
             </div>
