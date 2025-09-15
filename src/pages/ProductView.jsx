@@ -14,7 +14,11 @@ const ProductView = () => {
     
    
     const { productId } = useParams();
-    const  {products,latest,addToCartLocally} = useContext(BagContext);
+    const  {addToCartLocally} = useContext(BagContext);
+    
+    const products=JSON.parse(sessionStorage.getItem('productData'));
+    const latest=JSON.parse(sessionStorage.getItem("latestData"));
+
     console.log("products : products :",products,latest);
     
     var productInfo=products.find((p)=>p.id?.toString()==productId.toString() || p.product_id?.toString()==productId.toString());

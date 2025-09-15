@@ -135,6 +135,26 @@ export const Productsjson =[
   }
 ]
 
+
+export const sampleOrder = {
+  products: [
+    {
+      title: 'Wireless Headphones',
+      image: ['https://via.placeholder.com/150'],
+      quantity: 2,
+      price: 1500
+    },
+    {
+      title: 'Bluetooth Speaker',
+      image: ['https://via.placeholder.com/150'],
+      quantity: 1,
+      price: 2500
+    }
+  ],
+  amount: 5500,
+  paymentmethod: 'COD',
+  date: '10 Aug, 2025'
+};
   
 
 

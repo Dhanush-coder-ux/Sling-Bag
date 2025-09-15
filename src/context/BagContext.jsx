@@ -7,7 +7,7 @@ import { NetworkCalls } from "../components/Network";
 export const BagContext = createContext();
 
 const BagContextProvider = (props) => {
-  const [cartItems, setCartItems] = useState({});
+  const [cartItems, setCartItems] = useState([]);
   const [products, setProducts] = useState([]); 
   const [cartCount,setCartCount]=useState(0); 
   const [buttonName,setBtnName]=useState({'name':"Sign-In",'func':handleSignIn})
@@ -58,14 +58,19 @@ const BagContextProvider = (props) => {
     return cartCount;
   };
 
+  const getCartItems=()=>{
+    return cartItems;
+  };
+
   const getCart = async ({setCartData,setLoading}) => {
     try {
       const res = await axios.get(`${backend_url}/user/cart`);
       console.log(res.data);
       setLoading(false);
-      // setCartItems(res.data.user_carts);
-      setCartData(res.data.user_carts);
+      setCartItems(res.data.user_carts || []);
+      setCartData(res.data.user_carts || []);
       setProducts(res.data.user_carts || []);
+      sessionStorage.setItem('orderData',JSON.stringify(res.data.user_carts || []));
     } catch (err) {
       console.error("Error fetching cart:", err);
     }
@@ -101,7 +106,8 @@ const BagContextProvider = (props) => {
       const data = Array.isArray(res.data) ? res.data : res.data.products;
       setProducts(data || []);
       console.log(data)
-      setFilterProduct(data||[]);
+      setFilterProduct(data || []);
+      sessionStorage.setItem("productData",JSON.stringify(data || []));
     } catch (err) {
       console.error("Error fetching products:", err);
     } finally{
@@ -114,6 +120,7 @@ const BagContextProvider = (props) => {
       const res = await axios.get(`${backend_url}/product?latest=true`);
       const data = Array.isArray(res.data) ? res.data : res.data.products;
       setLatest(data || []);
+      sessionStorage.setItem("latestData",JSON.stringify(data || []));
       console.log(data)
     } catch (err) {
       console.error("Error fetching products:", err);
@@ -140,7 +147,9 @@ const BagContextProvider = (props) => {
   const value = {
     rupees,
     cartItems,
-    products,             
+    products,
+    backend_url,
+    getCartItems,             
     setCartItems,
     addToCart,
     addToCartLocally,
