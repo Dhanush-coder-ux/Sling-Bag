@@ -1,17 +1,14 @@
-
-import { BagContext } from "../context/BagContext";
-import { useContext, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 
 
 
 export const ProductCard = ({id,title,description,price,images}) => {
-    const {rupees,addToCart} = useContext(BagContext)
+    const rupees = "₹"
     
     return (
         <NavLink to={`/product/${id}`} >
-            <div key={id} className ="w-full max-w-sm bg-white border border-gray-200 rounded  shadow-sm dark:bg-gray-800 dark:border-gray-700">
-                <div>
+            <div key={id} className ="w-full max-w-sm bg-white border border-gray-200 rounded shadow-sm dark:bg-gray-800 dark:border-gray-700">
+                <div className="">
                     <img className="p-8 max-sm:p-2 rounded-t-lg" src={images[0]} alt="product image" />
                 </div>
                 <div className="px-5 pb-5">

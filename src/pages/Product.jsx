@@ -3,45 +3,42 @@ import { MobileAppBar } from '../section/MobileAppBar';
 import { ProductCard } from '../components/ProductCard';
 import { isMobile } from 'react-device-detect';
 import NavBar from '../section/NavBar';
-import { BagContext } from '../context/BagContext';
 import { chips } from '../constant';
 import { Chip } from '../components/Chip';
-import axios from 'axios';
+import { ProductContext } from '../context/ProductContext';
 
 export const ProductsPage = () => {
-  
 
-  const [category, setCategory] = useState([]);
-  const [filterproduct, setFilterProduct] = useState([]);
   const [loading, setLoading] = useState(true);
   const [selectedChipText,setChipClicked]=useState("All");
 
-  const { products, getProducts } = useContext(BagContext);
+  const { getProducts,products,setProducts } = useContext(ProductContext);
 
       useEffect(() => {
-        getProducts({setFilterProduct,setLoading});
+        setLoading(true)
+        getProducts()
+        setLoading(false)
       }, []);
-
-
-  
 
 
   // Toggle category filter
 const toggle = (value) => {
 
   if (value === "All") {
-    
-    setFilterProduct(products)
+    setProducts(prev=>({
+      ...prev,
+      filteredProducts:prev.allProducts
+    }))
     
     return 
     
   }
   if (value=="low to high") {
-    setFilterProduct(products.sort((a, b) => a.price - b.price));
+    setProducts(prev=>({...prev,filteredProducts:products.allProducts.sort((a, b) => a.price - b.price)}));
   } else if (value=="high to low") {
-    setFilterProduct(products.sort((a, b) => b.price - a.price));
+    setProducts(prev=>({...prev,filteredProducts:products.allProducts.sort((a, b) => b.price - a.price)}));
   }else{
-    setFilterProduct(products.filter((item)=>item['category']==value))
+    setProducts(prev=>({...prev,filteredProducts:products.allProducts.filter((item)=>item['category']==value)}))
   }
 };
 
@@ -78,7 +75,7 @@ const toggle = (value) => {
         { loading ? (
           <div className='text-3xl font-bold text-center col-span-4'>Loading...</div>
         ) :
-          filterproduct.map((item, index) => (
+          products.filteredProducts.map((item, index) => (
             <ProductCard
               key={index}
               id={item.id}

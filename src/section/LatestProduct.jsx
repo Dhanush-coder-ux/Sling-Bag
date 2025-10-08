@@ -1,16 +1,14 @@
-import React, { useContext, useEffect, useState } from 'react'
-
+import React from 'react'
 import { ScrollArea, ScrollBar } from "../components/ui/scroll-area"
 import Title from '../components/Title'
 import { Link } from 'react-router-dom'
-import { BagContext } from '../context/BagContext'
 
 
 
 
 
 const LatestProduct = () => {
-  const {latest} = useContext(BagContext)
+  const latest = []
   
 
 

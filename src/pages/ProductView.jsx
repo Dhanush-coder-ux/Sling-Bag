@@ -4,32 +4,23 @@ import React, { useContext, useEffect, useState } from 'react'
 import { useParams, useLocation } from 'react-router-dom'
 import { isMobile } from 'react-device-detect';
 import NavBar from '../section/NavBar';
-import Button, { BlackBgButton, GrayBgButton} from '../components/Buttons';
-import { BagContext } from '../context/BagContext';
 import { Counter } from '../components/Counter';
 import { platinum } from '../constant/ColorCodes';
 import { Productsjson } from '../constant';
+import { ProductContext } from '../context/ProductContext';
+import Button from '../components/Buttons';
 
 const ProductView = () => {
     
    
     const { productId } = useParams();
-    const  {addToCartLocally} = useContext(BagContext);
-    
-    const products=JSON.parse(sessionStorage.getItem('productData'));
-    const latest=JSON.parse(sessionStorage.getItem("latestData"));
+    const  { products } = useContext(ProductContext);
 
-    console.log("products : products :",products,latest);
+    console.log("products : ",products);
     
-    var productInfo=products.find((p)=>p.id?.toString()==productId.toString() || p.product_id?.toString()==productId.toString());
-    if (productInfo == [] || productInfo == undefined){
-      productInfo=latest.find((p)=>p.id?.toString()==productId.toString() || p.product_id?.toString()==productId.toString());
-    }
+    var productInfo=products.allProducts.find((p)=>p.id?.toString()==productId.toString() || p.product_id?.toString()==productId.toString());
+
     console.log("Product Info",productInfo);
-
-    useEffect(()=>{
-     addToCartLocally(productId,productInfo.cart_quantity || productInfo.quantity);
-    },[])
     
 
     return (
@@ -60,7 +51,7 @@ const ProductView = () => {
                   </div>
               </div>
               <div className='mt-5 max-sm:px-2 flex justify-between items-end gap-4 w-150 max-sm:w-full text-center'>
-                  <Counter productId={productId} className={'p-1'} productPrice={productInfo.price}></Counter>
+                  <Counter productId={productId} className={'p-1'} productCurQuantity={productInfo.cart_quantity}></Counter>
                   <Button text={"Buy Now"} className={`bg-[${platinum}] rounded-lg text-black w-50 p-2 mb-2 text-center`}/>
               </div>
 

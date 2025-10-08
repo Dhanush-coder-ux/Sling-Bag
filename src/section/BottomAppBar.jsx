@@ -1,15 +1,13 @@
 import React, { useContext } from 'react'
-import { NavLink } from 'react-router-dom'
-import { BagContext } from "../context/BagContext"
-import { coldGrey, platinum } from '../constant/ColorCodes'
 import { NavigationButton } from '../components/Buttons'
+import { CartContext } from '../context/CartContext'
 
 export function BottomAppBar() {
-    const {getCartCount}=useContext(BagContext)
+    const { cartCount }=useContext(CartContext)
     const navbars=[
         {label:'Home',icon:"/icons/home.svg",route:'/',canShowBadge:false},
         {label:'Products',icon:"/icons/product.svg",route:'/collections',canShowBadge:false},
-        {label:'Cart',icon:"/icons/cart.svg",route:'/cart',canShowBadge:true,badgeCount:getCartCount()},
+        {label:'Cart',icon:"/icons/cart.svg",route:'/cart',canShowBadge:true,badgeCount:cartCount},
         {label:'Know us',icon:"/icons/about.svg",route:'/know-us',canShowBadge:false},
          {label:'Orders',icon:"/icons/orders.svg",route:'/orders',canShowBadge:false}
     ];

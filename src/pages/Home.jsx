@@ -1,71 +1,46 @@
-import NavBar, { handleSignIn } from '../section/NavBar'
+import NavBar from '../section/NavBar'
 import Hero from '../section/Hero'
 import LatestProduct from '../section/LatestProduct'
-import ProductSlide from '../components/ProductSlide'
 import { useContext, useEffect } from 'react'
-import { BagContext } from '../context/BagContext'
 import { useSearchParams } from 'react-router-dom'
-import axios from 'axios'
-import Cookies from 'js-cookie'
-
-
-
-
+import { LoginContext } from '../context/LoginContext'
+import { CartContext } from '../context/CartContext'
 
 
 const Home = () => {
   const [searchParams]=useSearchParams();
-  const {getBtnName,updateBtnName}=useContext(BagContext);
+  const {getLoginCredentials,checkIsUserLoggedIn,isLoggedIn} = useContext(LoginContext)
+  const {getUserCartCount}=useContext(CartContext)
 
-  const deleteCookies=()=>{
-    console.log("hello world");
-    Cookies.remove('access_token');
-    Cookies.remove('refresh_token');
-    updateBtnName({name:'Sign-In',func:handleSignIn})
-  }
 
-  const handle = async ({token}) => {
-      
-      try {
-        
-        const tokens=await axios.get(`http://127.0.0.1:8001/auth/token/both?token=${token}`);
-
-        if (tokens.status==200){
-          Cookies.set("access_token",tokens.data.access_token);
-          Cookies.set('refresh_token',tokens.data.refresh_token);
-          updateBtnName({name:'Sign-Out',func:deleteCookies});
-        }
-
-      } catch (err) {
-        console.error("Error checking user:", err);
-      
-      }
-    };
 
   useEffect(()=>{
+    checkIsUserLoggedIn()
+
     const token=searchParams.get('token');
-    console.log(token)
-    if (token){
-      handle({token});
+    const name=searchParams.get('name');
+    const profile=searchParams.get('profile')
+
+    console.log("User params : ",name,profile,token)
+
+    if (token && name ){
+      getLoginCredentials({user_token:token,user_name:name,user_profile:profile});
     }
     else{
-      console.log("not sign in");
+      console.log("Please Sigin in your token is expired");
     }
-    
-    console.log(Cookies.get('access_token'));
-    
-    if (Cookies.get('access_token') && Cookies.get('refresh_token')){
-      updateBtnName({name:'Sign-Out',func:deleteCookies});
-    }
-
-
   },[])
+
+  useEffect(()=>{
+    getUserCartCount()
+  },[isLoggedIn])
+
   return (
     <div className='max-sm:mb-20'>
         <NavBar/>
         {/* Hero Section */}
         <Hero/>
-        <LatestProduct/>
+        {/* <LatestProduct/> */}
         
 
     </div>

@@ -1,48 +1,30 @@
 import { MobileAppBar } from '../section/MobileAppBar';
 import Button from '../components/Buttons';
-import { sampleOrder } from '../constant';
 import React, { useContext } from 'react';
 import NavBar from '../section/NavBar';
 import { isMobile } from 'react-device-detect';
-import { Code, IndianRupee } from 'lucide-react';
-import { BagContext } from '../context/BagContext';
-import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { CartContext } from '../context/CartContext';
+import { OrderContext } from '../context/OrderContext';
 
 const PlaceOrderNext = () => {
-    const { getCartItems, rupees,backend_url } = useContext(BagContext);
-    console.log("cartItmes🍦 :",JSON.parse(sessionStorage.getItem('orderData')));
-    const cartitems=JSON.parse(sessionStorage.getItem('orderData'));
-    const navigateTo=useNavigate();
+    const rupees = "₹"
+    const { userCart } = useContext(CartContext)
+    const { addOrder } = useContext(OrderContext)
     
-    const totalAmount = cartitems.reduce((sum, p) => sum + (p.total_price || 0), 0);
+    const totalAmount = userCart.reduce((sum, p) => sum + (p.total_price || 0), 0);
 
-    async function sumbitOrder(){
-        try{
-            const res = await axios.post(`${backend_url}/order`);
-            if (res.status==200){
-                console.log("order msg :",res.data);
-                navigateTo('/')
-                
-            }
-        }
-        catch(e){
-            console.log("error while sumbiting order : ",e);
-            
-        }
-    }
   return (
     <div>
 
     {isMobile ? <MobileAppBar appbarTitle="Orders" withBackArrow={true} /> : <NavBar />}
-    <div className="w-full flex justify-center p-4 max-sm:mt-10">
+    <div className="w-full flex justify-center p-4 max-sm:mt-15">
       
       <div className="w-full max-w-md bg-white shadow-lg rounded-lg border border-gray-300 my-6 p-6">
         <h2 className="text-2xl font-bold text-black mb-4 text-center">Order Summary</h2>
 
         {/* Products List */}
         <div className="space-y-4">
-          {cartitems.map((product) => (
+          {userCart.map((product) => (
             <div className="flex justify-between items-center border-b border-gray-200 pb-4">
               <div className="flex items-center gap-4">
                 <img src={product.image_urls[0]} alt={product.title} className="w-16 h-16 object-cover rounded" />
@@ -75,7 +57,7 @@ const PlaceOrderNext = () => {
           <Button
             text="Confirm Order"
             className="bg-black rounded-lg text-white p-2 w-full text-center"
-            onClick={() => sumbitOrder()}
+            onClick={() => addOrder()}
           />
         </div>
       </div>

@@ -1,6 +1,3 @@
-
-
- 
 export const chips=["All","men","women","low to high","high to low"];
 export const Productsjson =[
   {

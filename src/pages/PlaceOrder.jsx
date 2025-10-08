@@ -1,50 +1,19 @@
 import { MobileAppBar } from '../section/MobileAppBar';
-import Title from '../components/Title';
-import React, { use, useContext, useEffect, useRef, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import NavBar from '../section/NavBar';
 import { isMobile } from 'react-device-detect';
-import { BagContext } from '../context/BagContext';
-import { Productsjson } from '../constant';
-import { data, Link, useNavigate } from "react-router-dom"
-import axios from 'axios';
+import { OrderContext } from '../context/OrderContext';
 
 const PlaceOrder = () => {
-  
-  const navigateTo = useNavigate();
 
-  const backend_url = import.meta.env.VITE_BACKEND_URL;
-  const { rupees, cartTotAmount, cartitems, navigate, setCartItems } = useContext(BagContext);
+  const { addOrderAddress,getOrderAddress,userAddress,setUserAddress } = useContext(OrderContext);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [userAddress,setUserAddress]=useState({
-    street:'',
-    city:'',
-    state:'',
-    zipcode:'',
-    country:'',
-    mobile_number:''
-  })
 
-  const [method, setMethod] = useState('COD');
 
-  async function getUserAddress(){
-    try{
-      const res=await axios.get(`${backend_url}/user/address`);
-      console.log("user address from network : ",res.data);
-      if (res.status==200){
-        setUserAddress(res.data);
-      }
-      
-      
-    }
-    catch(e){
-      console.log("error fetching user address :",e);
-    }
-  }
   useEffect(() => {
-    getUserAddress();
+    getOrderAddress();
   }, [])
 
-  useEffect(()=>{console.log("from usestate : ",userAddress);},[userAddress])
 
   const onInputChange=(e)=>{
     setUserAddress({
@@ -58,37 +27,15 @@ const PlaceOrder = () => {
     
     e.preventDefault();
     setIsSubmitting(true);
-    console.log("ulla bro : ");
-    
-    try {
-
-      if (method === 'COD') {
-        const response = await axios.post(`${backend_url}/user/address`, {
-          address:`${userAddress.street}, ${userAddress.city}, ${userAddress.state}, ${userAddress.zipcode}, ${userAddress.country}`,
-          mobile_number:userAddress.mobile_number
-        }
-        );
-        if (response.status==200) {
-          console.log("address added successfully", response.data);
-          navigateTo('/place-order-next');
-          
-        } else {
-          console.error(response.data.message);
-        }
-      }
-    } catch (error) {
-      console.error(error);
-      toast.error('Failed to place order. Please try again.');
-    } finally {
-      setIsSubmitting(false);
-    }
+    addOrderAddress()
+    setIsSubmitting(false);
   };
 
   return (
     <div>
       {isMobile ? <MobileAppBar appbarTitle="Orders" withBackArrow={true} /> : <NavBar />}
 
-      <div className="flex justify-center mt-5 px-4 mb-5 max-sm:mt-15 max-sm:mb-20">
+      <div className="flex justify-center mt-5 px-4 mb-5 max-sm:mt-20 max-sm:mb-20">
         <div className="bg-white shadow-lg rounded-xl max-w-3xl w-full p-8 sm:p-10 border border-gray-300">
           <h1 className="text-3xl font-bold text-center text-black mb-8">Place Your Order</h1>
 

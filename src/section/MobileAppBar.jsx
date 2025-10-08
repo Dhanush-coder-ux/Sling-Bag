@@ -1,6 +1,5 @@
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import Title from "../components/Title";
 
 export const MobileAppBar = ({ appbarTitle, withBackArrow, withFavIcon,isFavourite }) => {
   const [isScrolled, setIsScrolled] = useState(false); // ✅ Renamed

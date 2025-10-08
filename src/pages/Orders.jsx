@@ -1,26 +1,13 @@
 import NavBar from '../section/NavBar';
 import Title from '../components/Title';
-import { BagContext } from '../context/BagContext';
 import { MobileAppBar } from '../section/MobileAppBar';
 import React, { useContext, useEffect, useState } from 'react';
 import { isMobile } from 'react-device-detect';
-import { Link } from 'react-router-dom';
-import axios from 'axios';
+import { OrderContext } from '../context/OrderContext';
 
 const Orders = () => {
-  const { rupees, backend_url } = useContext(BagContext);
-  const [orders, setOrders] = useState([]);
-  async function getOrders() {
-    try {
-      const res = await axios.get(`${backend_url}/orders`);
-      if (res.status === 200) {
-        console.log("your orders : ", res.data);
-        setOrders(res.data);
-      }
-    } catch (e) {
-      console.log('Error while getting orders:', e);
-    }
-  }
+  const rupees = "₹"
+  const { getOrders, userOrders } = useContext(OrderContext)
 
   useEffect(() => {
     getOrders();
@@ -30,7 +17,7 @@ const Orders = () => {
     <div className='max-sm:mb-20 mb-10'>
       {isMobile ? <MobileAppBar appbarTitle="Orders" withBackArrow={false} /> : <NavBar />}
 
-      <div className="mt-5 mx-10 max-sm:mx-6">
+      <div className="mt-5 mx-10 max-sm:mx-6 max-sm:my-15">
         <Title
           text1="My"
           text2="Orders"
@@ -39,7 +26,7 @@ const Orders = () => {
           divClassName="mb-5"
         />
 
-        {orders.map((order, orderIndex) => (
+        {userOrders?.map((order, orderIndex) => (
   <div key={orderIndex} className="bg-white shadow-xl rounded-lg border border-gray-200 p-6 mb-8">
     <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
 

@@ -1,4 +1,3 @@
-import { useContext } from 'react';
 import Button from '../components/Buttons';
 import { FlipWords } from '../components/ui/flipwords';
 import { Link } from 'react-router-dom';
@@ -6,7 +5,7 @@ import { Link } from 'react-router-dom';
 const Hero = () => {
   
   return (
-    <div className='max-w-7xl mx-auto px-4 max-sm:px-6 lg:px-8 py-5 max-sm:py-0'>
+    <div className='max-w-7xl mx-auto px-4 max-sm:px-6 mt-10 lg:px-8 py-5 max-sm:py-0'>
       <div className='text-center'>
         <div className='text-4xl sm:text-5xl md:text-6xl  font-bold leading-tight'>
           <h1 className="bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 bg-clip-text text-transparent">

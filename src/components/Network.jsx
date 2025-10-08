@@ -1,87 +1,93 @@
 
 import axios from 'axios';
 import Cookies from 'js-cookie';
-import React from 'react'
+import { jwtDecode } from 'jwt-decode';
 
 const backend_url = import.meta.env.VITE_BACKEND_URL;
 
-export const NetworkCalls = async ({ method, path, data = null , isRetried=false}) => {
+export const NetworkCalls = async ({ method, path, data = null}) => {
     const urlToCall = `${backend_url}${path}`;
+    method=method.toUpperCase()
+    console.log('in the network calls');
+    
+        var accessToken = Cookies.get('access_token');
+        const refreshToken =Cookies.get('refresh_token');
 
-    const getAuthHeaders = (accessToken) => ({
-        'Authorization': `Bearer ${accessToken}`
-    });
-
-    try {
-        const accessToken = Cookies.get('access_token');
+        console.log("acces & refrest token", accessToken, refreshToken);
         let response;
-
-        const config = {
-            headers: getAuthHeaders(accessToken),
-        };
-
-        if (method === "POST") {
-            response = await axios.post(urlToCall, data, config);
-        } else if (method === "GET") {
-            response = await axios.get(urlToCall, config);
-        } else if (method === "PUT") {
-            response = await axios.put(urlToCall, data, config);
-        } else if (method === "DELETE") {
-            response = await axios.delete(urlToCall, config);
-        } else {
-            throw new Error("Unsupported HTTP method");
-        }
-        console.log(response.data);
-        
-        return response.data;
-    } catch (error) {
-        console.log(error);
-        
-        // Handle 401 Unauthorized (try refreshing token once)
-        if (error.response && error.response.status === 401) {
-            try {
-                isRetried=true;
-                const refreshToken = Cookies.get('refresh_token');
-                const refreshResponse = await axios.get(
-                    `${backend_url}/auth/token/access`,
-                    {
-                        params: { token: refreshToken },
-                        withCredentials: true
-                    }
-                );
+        if (accessToken!=undefined && refreshToken!=undefined){
+            
+            try{
+                const decodedAccesToken=jwtDecode(accessToken,{verify:false});
+                const decodedRefreshToken=jwtDecode(refreshToken,{verify:false});
+                const currentTime = Math.floor(Date.now() / 1000);
+                console.log(currentTime)
+                console.log(decodedAccesToken,);
                 
-                // Update access_token cookie with new token
-                const newAccessToken = refreshResponse.data.access_token;
-                Cookies.set('access_token', newAccessToken);
 
-                // Retry original request with new access token
-                const configRetry = {
-                    headers: getAuthHeaders(newAccessToken),
-                    withCredentials: true
+
+                if (decodedAccesToken.exp < currentTime){
+                    console.log("accesstoken expired");
+                    if (decodedRefreshToken.exp < currentTime){
+                        console.log('refresh token expired, please login'); 
+                        return;
+                    }
+                    else{
+                        const newAccessToken= await axios.get(`${backend_url}/auth/token/access`,{
+                            headers:{"Authorization":`Bearer ${refreshToken}`,
+                        },});
+
+                        if(newAccessToken.status==200){
+                            console.log('new access token ',newAccessToken.data.access_token);
+                            Cookies.set('access_token',newAccessToken.data.access_token);
+                            accessToken=newAccessToken.data.access_token;
+                        }
+                        else{
+                            console.log("error :",newAccessToken.data);
+                        }
+                        
+                    }
+                }
+                const config = {
+                    headers: {
+                        "Authorization":`Bearer ${accessToken}`,
+                        "Content-Type": "application/json",
+                    }
+                    
                 };
-
-                let retryResponse;
+                console.log('before url to call : ',config);
+                
                 if (method === "POST") {
-                    retryResponse = await axios.post(urlToCall, data, configRetry);
+                    response = await axios.post(urlToCall,data,config);
                 } else if (method === "GET") {
-                    retryResponse = await axios.get(urlToCall, configRetry);
+                    response = await axios.get(urlToCall,config);
                 } else if (method === "PUT") {
-                    retryResponse = await axios.put(urlToCall, data, configRetry);
+                    response = await axios.put(urlToCall,data,config);
                 } else if (method === "DELETE") {
-                    retryResponse = await axios.delete(urlToCall, configRetry);
+                    response = await axios.delete(urlToCall,config);
+                } else {
+                    throw new Error("Unsupported HTTP method");
+                }
+                console.log('data from network : ',response.data);
+                
+                if (response.status==200){
+                    return response.data;
+                }
+                else{
+                    console.error("error :",response.data,'status code : ',response.status);
+                    return;
                 }
 
-                return retryResponse.data;
-            } catch (refreshError) {
-                console.warn("Refresh token expired or invalid – redirect to login");
-                window.open('/login', '_self');  // Redirect to login page
-                throw refreshError;
-            }
+        } catch (error) {
+            console.log(error);
+            return 
         }
 
-        // Other errors
-        console.error("Network call error:", error);
-        throw error;
+    }
+    else{
+        console.log("there is no tokens please login");
+        return;
+        
     }
 };
 
