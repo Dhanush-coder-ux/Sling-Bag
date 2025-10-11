@@ -8,7 +8,9 @@ import { OrderContext } from '../context/OrderContext';
 
 const PlaceOrderNext = () => {
     const rupees = "₹"
-    const { userCart } = useContext(CartContext)
+    const  userCart  = JSON.parse(sessionStorage.getItem('userCart')) || []
+    console.log("user Carts : ",userCart);
+    
     const { addOrder } = useContext(OrderContext)
     
     const totalAmount = userCart.reduce((sum, p) => sum + (p.total_price || 0), 0);

@@ -1,4 +1,4 @@
-import { NetworkCalls } from '../components/Network'
+import { useNetWorkCalls } from '../components/Network'
 import React, { createContext, useContext, useState } from 'react'
 import { CartContext } from './CartContext'
 import { useNavigate } from 'react-router-dom'
@@ -9,6 +9,7 @@ export const OrderContext=createContext()
 
 export const OrderContextProvider = (props) => {
     const { setCartCount } = useContext(CartContext)
+    const {NetWorkCalls}=useNetWorkCalls()
     const navigateTo=useNavigate();
     const [userOrders,setUserOrders] = useState([])
     const [userAddress,setUserAddress]=useState({
@@ -25,7 +26,7 @@ export const OrderContextProvider = (props) => {
     const addOrderAddress=async ()=>{
         try{
             const joinedAddress=`${userAddress.street}, ${userAddress.city}, ${userAddress.state}, ${userAddress.zipcode}, ${userAddress.country}`
-            const res=await NetworkCalls({method:'post',path:'/user/address',data:{address:joinedAddress,mobile_number:userAddress.mobile_number}})
+            const res=await NetWorkCalls({method:'post',path:'/user/address',data:{address:joinedAddress,mobile_number:userAddress.mobile_number}})
 
             if (res){
                 navigateTo('/place-order-next')
@@ -41,7 +42,7 @@ export const OrderContextProvider = (props) => {
 
     const getOrderAddress=async ()=>{
         try{
-            const res=await NetworkCalls({method:'get',path:'/user/address'})
+            const res=await NetWorkCalls({method:'get',path:'/user/address'})
 
             if (res) {
                 setUserAddress(
@@ -71,7 +72,7 @@ export const OrderContextProvider = (props) => {
     const addOrder=async ()=>{
         
         try{
-            const res=await NetworkCalls({method:'post',path:'/order'})
+            const res=await NetWorkCalls({method:'post',path:'/order'})
 
             if (res) {
                 setCartCount(0)
@@ -89,7 +90,7 @@ export const OrderContextProvider = (props) => {
 
     const getOrders=async ()=>{
         try{
-            const res=await NetworkCalls({method:'get',path:'/orders'})
+            const res=await NetWorkCalls({method:'get',path:'/orders'})
 
             if (res) {
                 setUserOrders(res)

@@ -15,8 +15,8 @@ export function BottomAppBar() {
     return (
         <div className='w-full p-3.5 fixed bottom-0 flex justify-between  bg-white shadow-2xl border-t-2'>
             {
-                navbars.map(({ label , icon , route, canShowBadge, badgeCount })=>(
-                    <NavigationButton label={label} icon={icon} route={route} canShowBadge={canShowBadge} badgeCount={badgeCount}></NavigationButton> 
+                navbars.map(({ label , icon , route, canShowBadge, badgeCount },index)=>(
+                    <NavigationButton key={index} label={label} icon={icon} route={route} canShowBadge={canShowBadge} badgeCount={badgeCount}></NavigationButton> 
                 ))
             }
         </div>

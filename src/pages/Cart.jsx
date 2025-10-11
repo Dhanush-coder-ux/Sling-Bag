@@ -7,11 +7,13 @@ import { CartProductCard } from '../components/ProductCard';
 import  Button  from '../components/Buttons';
 import { CartContext } from '../context/CartContext';
 import { useNavigate } from 'react-router-dom';
+import { ProductContext } from '../context/ProductContext';
 
 
 const Cart = () => {
   const rupees = "₹"
   const { getUserCart,userCart } = useContext(CartContext)
+  const { setProductInfo } = useContext(ProductContext)
   const [isLoading,setLoading]=useState(true);
   const totalAmount = userCart.reduce((sum, p) => sum + (p.total_price || 0), 0);
   const totalQuantity= userCart.reduce((sum, p) => sum + (p.quantity || 0), 0);
@@ -21,7 +23,9 @@ const Cart = () => {
   useEffect(() => {
     setLoading(true)
     getUserCart()
+    setProductInfo({})
     setLoading(false)
+
     
   },[]);
 

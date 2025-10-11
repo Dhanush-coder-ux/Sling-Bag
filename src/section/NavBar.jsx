@@ -8,14 +8,24 @@ import Title from "../components/Title";
 
 const NavBar = () => {
   const { isLoggedIn, login, logout } = useContext(LoginContext);
-  const { cartCount } = useContext(CartContext);
+  const { cartCount,setCartCount } = useContext(CartContext);
   const [isImageError, setImageError] = useState(false);
   const [isLoading,setIsLoading]=useState(false)
+  
   const [isDropdownOpen, setDropdownOpen] = useState(false);
   const dropdownRef = useRef(null);
 
   const userProfile = Cookies.get("user_profile");
   const userName = Cookies.get("user_name");
+
+  useEffect(()=>{
+    console.log('is lOgged im :',isLoggedIn);
+    
+    if (isLoggedIn==false){
+      setCartCount(0)
+    }
+    
+  },[isLoggedIn])
 
   // Close dropdown if clicked outside
   useEffect(() => {
@@ -90,10 +100,20 @@ const NavBar = () => {
 
                 {/* Dropdown menu */}
                 {isDropdownOpen && (
-                  <div className="absolute right-0 mt-2 w-48 bg-white rounded-xl shadow-xl border border-gray-200 py-2 animate-fadeIn">
+                  <div className="absolute right-0 mt-2 w-48 bg-white rounded-xl shadow-xl border border-gray-200 py-2 animate-fadeIn z-80">
                     <p className="px-4 py-2 text-gray-700 font-medium border-b">
                       Hi, {userName || "User"}
                     </p>
+                    {Cookies.get('role')=='admin' && <button
+                      onClick={() => {
+                        window.open('http://localhost:5174/')
+                        setDropdownOpen(false);
+                      }}
+                      className="w-full text-left px-4 py-2 text-purple-500 hover:bg-gray-100 font-semibold border-b"
+                    >
+                      Dashboard
+                    </button>}
+
                     <button
                       onClick={() => {
                         logout();

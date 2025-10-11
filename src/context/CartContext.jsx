@@ -1,6 +1,7 @@
-import { NetworkCalls } from '../components/Network';
-import { TruckElectric } from 'lucide-react';
-import React, { createContext, useContext, useState } from 'react'
+import Cookies from 'js-cookie';
+import { useNetWorkCalls } from '../components/Network';
+import { TruckElectric, UndoIcon } from 'lucide-react';
+import React, { createContext, useContext, useEffect, useState } from 'react'
 
 
 
@@ -10,10 +11,11 @@ export const CartContext=createContext();
 export const CartContextProvider=(props)=>{
     const [cartCount,setCartCount]=useState(0)
     const [userCart,setUserCart]=useState([])
+    const {NetWorkCalls}=useNetWorkCalls()
 
     const addToCart=async({productId,ProductCurCartCount})=>{
         try{
-            const res=await NetworkCalls({method:'post',path:'/user/cart',data:{product_id:productId,quantity:ProductCurCartCount+1}})
+            const res=await NetWorkCalls({method:'post',path:'/user/cart',data:{product_id:productId,quantity:ProductCurCartCount+1}})
             if (res){
                 setCartCount(prev=>prev+1)
                 return true
@@ -29,9 +31,26 @@ export const CartContextProvider=(props)=>{
 
     const removeToCart=async({productId,ProductCurCartCount})=>{
         try{
-            const res=await NetworkCalls({method:'post',path:'/user/cart',data:{product_id:productId,quantity:ProductCurCartCount-1}})
+            const res=await NetWorkCalls({method:'post',path:'/user/cart',data:{product_id:productId,quantity:ProductCurCartCount-1}})
             if (res){
                 setCartCount(prev=>prev-1)
+                return true
+            }
+            else{
+                return false
+            }
+        }catch (e){
+            console.error("Error removing cart : ",e);
+            return false
+        }
+    }
+
+    const deleteCartProduct=async({productId})=>{
+        try{
+            const res=await NetWorkCalls({method:'delete',path:`/user/cart?product_id=${productId}`})
+            if (res){
+                await getUserCart()
+                await getUserCartCount()
                 return true
             }
             else{
@@ -45,9 +64,12 @@ export const CartContextProvider=(props)=>{
     
     const getUserCart=async ()=>{
         try{
-            const res=await NetworkCalls({method:'get',path:'/user/cart'})
+            const res=await NetWorkCalls({method:'get',path:'/user/cart'})
             if (res){
+                console.log("user carts from network :",res.user_carts);
+                
                 setUserCart(res.user_carts)
+                sessionStorage.setItem('userCart',JSON.stringify(res.user_carts))
             }
         }
         catch (e){
@@ -58,7 +80,10 @@ export const CartContextProvider=(props)=>{
 
     const getUserCartCount=async ()=>{
         try{
-            const res=await NetworkCalls({method:'get',path:'/user/cart/count'})
+            if (Cookies.get('access_token')==undefined || Cookies.get('refresh_token')==undefined){
+                setCartCount(0)
+            }
+            const res=await NetWorkCalls({method:'get',path:'/user/cart/count'})
             if (res){
                 setCartCount(res.cart_count)
             }
@@ -69,7 +94,11 @@ export const CartContextProvider=(props)=>{
         }
     }
 
-    const values={addToCart,removeToCart,getUserCartCount,getUserCart,userCart,setUserCart,cartCount,setCartCount}
+    useEffect(() => {
+        getUserCartCount();
+    }, []);
+
+    const values={addToCart,removeToCart,getUserCartCount,getUserCart,deleteCartProduct,userCart,setUserCart,cartCount,setCartCount}
     return (
         <CartContext.Provider value={values}>
             {props.children}

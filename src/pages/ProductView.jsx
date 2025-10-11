@@ -14,14 +14,17 @@ const ProductView = () => {
     
    
     const { productId } = useParams();
-    const  { products } = useContext(ProductContext);
+    const  { productInfo,getProductInfo } = useContext(ProductContext);
 
-    console.log("products : ",products);
     
-    var productInfo=products.allProducts.find((p)=>p.id?.toString()==productId.toString() || p.product_id?.toString()==productId.toString());
 
-    console.log("Product Info",productInfo);
+    useEffect(()=>{
+      if (productId!=='' || productId!=null){
+          getProductInfo({productId:productId})
+      }
+    },[])
     
+    console.log("Product Info : ",productInfo, Object.keys(productInfo).length);
 
     return (
       <>
@@ -29,7 +32,9 @@ const ProductView = () => {
           { isMobile ? <MobileAppBar  appbarTitle={"Product"}  withBackArrow={true} ></MobileAppBar> : <NavBar/>}
 
         {/* product overview infos */}
+        
         <div className='flex justify-center items-center max-sm:mt-15 max-sm:mb-20 md:mt-10 md:mb-10 lg:mt-0 lg:mb-10'>
+          {Object.keys(productInfo).length>0 ?
           <div className={`flext justify-center items-center flex-row w-200 max-sm:w-full max-sm:mx-2 md:mt-10 lg:m-0`}>
             <div className='flex flex-col text-center justify-center items-center'>
 
@@ -51,13 +56,16 @@ const ProductView = () => {
                   </div>
               </div>
               <div className='mt-5 max-sm:px-2 flex justify-between items-end gap-4 w-150 max-sm:w-full text-center'>
-                  <Counter productId={productId} className={'p-1'} productCurQuantity={productInfo.cart_quantity}></Counter>
+                  <Counter key={productId} productId={productId} className={'p-1'} productCurQuantity={productInfo.cart_quantity}></Counter>
                   <Button text={"Buy Now"} className={`bg-[${platinum}] rounded-lg text-black w-50 p-2 mb-2 text-center`}/>
               </div>
 
             </div>
           </div>
+          : <center><h1 className='font-bold text-2xl'>No Product Found</h1></center>
+        }
         </div>
+        
       </>
       
       

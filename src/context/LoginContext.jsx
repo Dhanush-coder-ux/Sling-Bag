@@ -1,5 +1,4 @@
-import { NetworkCalls } from '../components/Network'
-import React, { createContext, useContext, useState } from 'react'
+import React, { createContext, useContext, useEffect, useState } from 'react'
 import Cookies from 'js-cookie'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
@@ -10,7 +9,7 @@ export const LoginContext=createContext()
 
 export const LoginContextProvider = (props) => {
     const [isLoggedIn,setIsLoggedIn]=useState(false)
-    const  { setCartCount } = useContext(CartContext)
+    // const  { setCartCount } = useContext(CartContext)
     const navigateTo=useNavigate()
 
     const login=async()=>{
@@ -36,8 +35,9 @@ export const LoginContextProvider = (props) => {
         Cookies.remove('refresh_token');
         Cookies.remove('user_name');
         Cookies.remove('user_profile');
+        Cookies.remove('role')
 
-        setCartCount(0)
+        // setCartCount(0)
 
         setIsLoggedIn(false)
     }
@@ -51,6 +51,7 @@ export const LoginContextProvider = (props) => {
                 Cookies.set('refresh_token',res.data.refresh_token);
                 Cookies.set('user_name',user_name)
                 Cookies.set('user_profile',user_profile)
+                Cookies.set('role',res.data.role)
                 setIsLoggedIn(true)
                 
             }
@@ -78,9 +79,13 @@ export const LoginContextProvider = (props) => {
                 setIsLoggedIn(true)
             }
             else{
-                setIsLoggedIn(false)
+                await logout()
             }
     }
+
+    useEffect(()=>{
+        checkIsUserLoggedIn()
+    })
 
     const values={login,logout,getLoginCredentials,checkIsUserLoggedIn,isLoggedIn,setIsLoggedIn}
 

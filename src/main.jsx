@@ -8,15 +8,17 @@ import { LoginContextProvider } from './context/LoginContext.jsx';
 
 createRoot(document.getElementById('root')).render(
   <BrowserRouter>
+  <LoginContextProvider>
     <CartContextProvider>
-      <LoginContextProvider>
+      
         <OrderContextProvider>
           <ProductContextProvider>
             <App />
           </ProductContextProvider>
         </OrderContextProvider>
-      </LoginContextProvider>
+      
     </CartContextProvider>
+    </LoginContextProvider>
     
   </BrowserRouter>
 )

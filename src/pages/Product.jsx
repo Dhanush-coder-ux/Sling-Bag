@@ -12,9 +12,10 @@ export const ProductsPage = () => {
   const [loading, setLoading] = useState(true);
   const [selectedChipText,setChipClicked]=useState("All");
 
-  const { getProducts,products,setProducts } = useContext(ProductContext);
+  const { getProducts,products,setProducts, setProductInfo } = useContext(ProductContext);
 
       useEffect(() => {
+        setProductInfo({})
         setLoading(true)
         getProducts()
         setLoading(false)
@@ -83,6 +84,7 @@ const toggle = (value) => {
               description={item.description}
               price={item.price}
               images={item.image_urls}
+              isLatest={item.is_latest}
               
             />
           ))

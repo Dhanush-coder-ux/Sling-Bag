@@ -27,13 +27,13 @@ const Home = () => {
       getLoginCredentials({user_token:token,user_name:name,user_profile:profile});
     }
     else{
-      console.log("Please Sigin in your token is expired");
+      console.log("Please SignIn again your token is expired");
     }
   },[])
 
-  useEffect(()=>{
-    getUserCartCount()
-  },[isLoggedIn])
+  // useEffect(()=>{
+  //   getUserCartCount()
+  // },[isLoggedIn])
 
   return (
     <div className='max-sm:mb-20'>

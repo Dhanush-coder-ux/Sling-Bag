@@ -1,4 +1,4 @@
-import React, { useState,useContext } from 'react'
+import React, { useState,useContext, useEffect } from 'react'
 import { CartContext } from '../context/CartContext';
 
 
@@ -6,6 +6,9 @@ export const Counter=({productId,productCurQuantity,className})=> {
     const { addToCart,removeToCart } = useContext(CartContext)
     const [prodCurCount,setProdCurCount]=useState(productCurQuantity)
     
+    useEffect(() => {
+        setProdCurCount(productCurQuantity);
+    }, [productCurQuantity]);
 
     const addToCartFunc=()=>{
         addToCart({productId:productId,ProductCurCartCount:prodCurCount})

@@ -15,14 +15,15 @@ const ProductSlide = ({image}) => {
     <div className="w-full max-w-xl mx-auto">
       <Carousel>
         <CarouselContent>
-          {image.map((src, index) => (
-            <CarouselItem key={index} className="flex justify-center items-center">
+          {image?.map((src, index) => (
+            <CarouselItem key={index} className="flex justify-center items-center h-100 max-sm:h-80 ">
               <img
                 src={src}
                 alt={`Product ${index + 1}`}
                 width={400}
                 height={300}
-                className="rounded-lg object-cover"
+                className="rounded-lg cursor-pointer"
+                onClick={()=>{window.open(src)}}
               />
             </CarouselItem>
           ))}
