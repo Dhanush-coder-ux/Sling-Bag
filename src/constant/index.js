@@ -1,4 +1,4 @@
-export const chips=["All","men","women","low to high","high to low"];
+export const chips=["All","men","women","kids","low to high","high to low"];
 export const Productsjson =[
   {
     "id": 1,

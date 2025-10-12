@@ -23,7 +23,7 @@ export const ProductContextProvider = (props) => {
                             filteredProducts:res.products
                         }
                     )
-                    s
+                    
                     return true
                 }
                 else return false
