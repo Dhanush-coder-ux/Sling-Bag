@@ -7,6 +7,8 @@ import { CartContext } from './CartContext'
 
 export const LoginContext=createContext()
 
+const backend_url = import.meta.env.VITE_BACKEND_URL;
+
 export const LoginContextProvider = (props) => {
     const [isLoggedIn,setIsLoggedIn]=useState(false)
     // const  { setCartCount } = useContext(CartContext)
@@ -16,7 +18,7 @@ export const LoginContextProvider = (props) => {
         console.log("on login");
         
         try{
-            const res=await axios.get('http://127.0.0.1:8000/auth/user')
+            const res=await axios.get(`${backend_url}/auth/user`)
             if (res){
                 window.location.href=res.data.login_url
             }
@@ -44,7 +46,7 @@ export const LoginContextProvider = (props) => {
 
     const getLoginCredentials=async({user_token,user_name,user_profile})=>{
         try{
-            const res=await axios.get(`http://127.0.0.1:8000/auth/token/both?token=${user_token}`);
+            const res=await axios.get(`${backend_url}/auth/token/both?token=${user_token}`);
             console.log("Credentials : ",res)
             if (res.status==200){
                 Cookies.set("access_token",res.data.access_token);
