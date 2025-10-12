@@ -3,11 +3,10 @@ import Cookies from 'js-cookie'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 import { CartContext } from './CartContext'
+import { backend_url } from '../components/Network'
 
 
 export const LoginContext=createContext()
-
-const backend_url = import.meta.env.VITE_BACKEND_URL;
 
 export const LoginContextProvider = (props) => {
     const [isLoggedIn,setIsLoggedIn]=useState(false)
@@ -15,7 +14,7 @@ export const LoginContextProvider = (props) => {
     const navigateTo=useNavigate()
 
     const login=async()=>{
-        console.log("on login");
+        console.log("on login",backend_url);
         
         try{
             const res=await axios.get(`${backend_url}/auth/user`)
