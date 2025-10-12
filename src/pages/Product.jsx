@@ -6,6 +6,8 @@ import NavBar from '../section/NavBar';
 import { chips } from '../constant';
 import { Chip } from '../components/Chip';
 import { ProductContext } from '../context/ProductContext';
+import { ProductSkeleton } from "../components/ProductSkeleton";
+
 
 export const ProductsPage = () => {
 
@@ -16,9 +18,7 @@ export const ProductsPage = () => {
 
       useEffect(() => {
         setProductInfo({})
-        setLoading(true)
-        getProducts()
-        setLoading(false)
+        getProducts({setLoading})
       }, []);
 
 
@@ -72,24 +72,26 @@ const toggle = (value) => {
       </div>
 
       {/* Products */}
-      <div className="grid lg:grid-cols-4 max-sm:grid-cols-2 max-sm:mb-20 gap-4 mt-8 mx-2 md:mx-8 md:grid-cols-2 md:mb-20">
-        { loading ? (
-          <div className='text-3xl font-bold text-center col-span-4'>Loading...</div>
-        ) :
-          products.filteredProducts.map((item, index) => (
-            <ProductCard
-              key={index}
-              id={item.id}
-              title={item.title}
-              description={item.description}
-              price={item.price}
-              images={item.image_urls}
-              isLatest={item.is_latest}
-              
-            />
-          ))
-        }
-      </div>
+     <div className="grid lg:grid-cols-4 max-sm:grid-cols-2 max-sm:mb-20 gap-4 mt-8 mx-2 md:mx-8 md:grid-cols-2 md:mb-20">
+  {loading ? (
+    Array(8) // show 8 skeletons
+      .fill(0)
+      .map((_, index) => <ProductSkeleton key={index} />)
+  ) : (
+    products.filteredProducts.map((item, index) => (
+      <ProductCard
+        key={index}
+        id={item.id}
+        title={item.title}
+        description={item.description}
+        price={item.price}
+        images={item.image_urls}
+        isLatest={item.is_latest}
+      />
+    ))
+  )}
+</div>
+
     </>
   );
 };

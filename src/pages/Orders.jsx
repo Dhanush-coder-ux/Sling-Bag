@@ -7,11 +7,17 @@ import { OrderContext } from '../context/OrderContext';
 import { NavLink } from 'react-router-dom';
 
 const Orders = () => {
-  const rupees = "₹"
-  const { getOrders, userOrders } = useContext(OrderContext)
+  const rupees = "₹";
+  const { getOrders, userOrders } = useContext(OrderContext);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    getOrders();
+    const fetchOrders = async () => {
+      setLoading(true);
+      await getOrders();
+      setLoading(false);
+    };
+    fetchOrders();
   }, []);
 
   return (
@@ -27,54 +33,74 @@ const Orders = () => {
           divClassName="mb-5"
         />
 
-        {userOrders.length>0 ? userOrders?.map((order, orderIndex) => (
-          <div key={orderIndex} className="bg-white shadow-xl rounded-lg border border-gray-200 p-6 mb-8">
-            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
-
-              {/* Order Info */}
-              
-              <div className="flex items-start gap-6">
+        {loading ? (
+          // 🔹 Loading Skeleton
+          <div className="flex flex-col gap-6">
+            {[1, 2, 3].map((i) => (
+              <div key={i} className="bg-gray-200 rounded-lg p-6 animate-pulse flex flex-col sm:flex-row gap-6">
                 <div className="flex flex-wrap gap-4">
-                  {order.products.map((item, index) => (
-                    <NavLink to={`/product/${item.product_id}`} key={index}>
-                    <div className="flex flex-col items-start bg-gray-50 p-4 rounded-lg shadow-md w-60 cursor-pointer">
-                      <img
-                        src={item.image_urls[0]}
-                        alt={item.title}
-                        className="w-32 h-32 object-cover rounded"
-                      />
-                      <h3 className="font-semibold text-lg text-black text-center mt-3 truncate max-w-[220px]">
-                        {item.title}
-                      </h3>
-                      <p className="text-gray-500 mt-1">Quantity: {item.quantity}</p>
-                      <p className="text-gray-500">Price: {rupees}{item.price}</p>
-                      <p className="text-gray-500">Total: {rupees}{item.total_price}</p>
-                    </div>
-                    </NavLink>
+                  {[1, 2].map((j) => (
+                    <div key={j} className="w-60 h-48 bg-gray-300 rounded-lg"></div>
                   ))}
                 </div>
-              </div>
-              
-
-              {/* Status & Address */}
-              <div className="flex flex-col gap-4 text-gray-700">
-                <div className="flex items-center gap-3">
-                  <span className="w-3 h-3 rounded-full bg-green-400"></span>
-                  <span className="font-medium text-black">{order.status}</span>
+                <div className="flex flex-col gap-4 w-full sm:w-60">
+                  <div className="w-32 h-6 bg-gray-300 rounded"></div>
+                  <div className="w-48 h-4 bg-gray-300 rounded"></div>
+                  <div className="w-40 h-4 bg-gray-300 rounded"></div>
+                  <div className="w-36 h-4 bg-gray-300 rounded"></div>
+                  <div className="w-28 h-8 bg-gray-300 rounded mt-2"></div>
                 </div>
-                <p><span className="font-semibold">Address:</span> {order.address}</p>
-                <p><span className="font-semibold">Payment Method:</span> cod</p>
-                <p><span className="font-semibold">Order Date:</span> {order.datetime.slice(0,10)}</p>
+              </div>
+            ))}
+          </div>
+        ) : userOrders.length > 0 ? (
+          userOrders.map((order, orderIndex) => (
+            <div key={orderIndex} className="bg-white shadow-xl rounded-lg border border-gray-200 p-6 mb-8">
+              <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
+                
+                {/* Order Info */}
+                <div className="flex items-start gap-6">
+                  <div className="flex flex-wrap gap-4">
+                    {order.products.map((item, index) => (
+                      <NavLink to={`/product/${item.product_id}`} key={index}>
+                        <div className="flex flex-col items-start bg-gray-50 p-4 rounded-lg shadow-md w-60 cursor-pointer">
+                          <img
+                            src={item.image_urls[0]}
+                            alt={item.title}
+                            className="w-32 h-32 object-cover rounded"
+                          />
+                          <h3 className="font-semibold text-lg text-black text-center mt-3 truncate max-w-[220px]">
+                            {item.title}
+                          </h3>
+                          <p className="text-gray-500 mt-1">Quantity: {item.quantity}</p>
+                          <p className="text-gray-500">Price: {rupees}{item.price}</p>
+                          <p className="text-gray-500">Total: {rupees}{item.total_price}</p>
+                        </div>
+                      </NavLink>
+                    ))}
+                  </div>
+                </div>
 
-                <button className="mt-4 bg-black text-white px-5 py-2 rounded-lg hover:bg-gray-800 transition">
-                  Track Order
-                </button>
+                {/* Status & Address */}
+                <div className="flex flex-col gap-4 text-gray-700">
+                  <div className="flex items-center gap-3">
+                    <span className="w-3 h-3 rounded-full bg-green-400"></span>
+                    <span className="font-medium text-black">{order.status}</span>
+                  </div>
+                  <p><span className="font-semibold">Address:</span> {order.address}</p>
+                  <p><span className="font-semibold">Payment Method:</span> cod</p>
+                  <p><span className="font-semibold">Order Date:</span> {order.datetime.slice(0,10)}</p>
+
+                  <button className="mt-4 bg-black text-white px-5 py-2 rounded-lg hover:bg-gray-800 transition">
+                    Track Order
+                  </button>
+                </div>
               </div>
             </div>
-          </div>
-        ))
-        : <center><h1 className=' font-bold text-2xl'>No Orders Yet</h1></center>
-      }
+          ))
+        ) : (
+          <center><h1 className=' font-bold text-2xl'>No Orders Yet</h1></center>
+        )}
       </div>
     </div>
   );

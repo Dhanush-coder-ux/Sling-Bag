@@ -11,9 +11,11 @@ export const ProductContextProvider = (props) => {
     const [productInfo,setProductInfo]=useState({})
     const {NetWorkCalls}=useNetWorkCalls()
 
-    const getProducts=async ()=>{
+    const getProducts=async ({setLoading})=>{
             try{
+                setLoading(true)
                 const res=await NetWorkCalls({method:'GET',path:'/products',ignoreCookie:true})
+                setLoading(false)
                 if (res) {
                     setProducts(
                         {
@@ -21,6 +23,7 @@ export const ProductContextProvider = (props) => {
                             filteredProducts:res.products
                         }
                     )
+                    s
                     return true
                 }
                 else return false
@@ -32,8 +35,9 @@ export const ProductContextProvider = (props) => {
             
         }
     
-    const getProductInfo=async ({productId})=>{
+    const getProductInfo=async ({productId,setLoading})=>{
             try{
+                setLoading(true)
                 var path=`/products/${productId}`
                 var ignoreCookie=true
                 if (Cookies.get('access_token') && Cookies.get('refresh_token')){
@@ -41,6 +45,7 @@ export const ProductContextProvider = (props) => {
                     ignoreCookie=false
                 }
                 const res=await NetWorkCalls({method:'GET',path:path,ignoreCookie:ignoreCookie})
+                setLoading(false)
                 if (res) {
                     setProductInfo(
                         res.product

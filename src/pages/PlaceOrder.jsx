@@ -8,10 +8,10 @@ const PlaceOrder = () => {
 
   const { addOrderAddress,getOrderAddress,userAddress,setUserAddress } = useContext(OrderContext);
   const [isSubmitting, setIsSubmitting] = useState(false);
-
+  
 
   useEffect(() => {
-    getOrderAddress();
+    getOrderAddress({setIsSubmitting});
   }, [])
 
 
@@ -26,9 +26,8 @@ const PlaceOrder = () => {
   const handleSubmit = async (e) => {
     
     e.preventDefault();
-    setIsSubmitting(true);
-    addOrderAddress()
-    setIsSubmitting(false);
+  
+    addOrderAddress({setIsSubmitting})
   };
 
   return (

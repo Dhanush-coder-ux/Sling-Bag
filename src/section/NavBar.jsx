@@ -39,8 +39,8 @@ const NavBar = () => {
   }, []);
 
   return (
-    <div>
-      <div className="navbar flex justify-between items-center px-6 py-4 shadow-md bg-white h-20">
+    <div >
+      <div className="navbar  flex justify-between items-center px-6 py-4 shadow-md bg-white h-20">
         <Link to="/" className="text-2xl font-bold text-black">
           <Title text1={"Sling"} text2={"Bag"} />
         </Link>
@@ -67,7 +67,7 @@ const NavBar = () => {
         <div className="flex gap-8 text-medium text-xl max-sm:px-2 px-4 py-3 items-center">
           <div className="px-4 py-3">
             <NavLink className="relative sm:flex hidden" to="/cart">
-              <img src="/icons/carts.svg" width={30} height={30} alt="" />
+              <img src="/icons/cart.svg" width={30} height={30} alt="" />
               <p className="absolute right-[-5px] bottom-[-5px] w-4 text-center leading-4 bg-red-600 aspect-square rounded-full text-white text-[8px]">
                 {cartCount > 99 ? "99+" : cartCount}
               </p>

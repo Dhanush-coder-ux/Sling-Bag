@@ -23,11 +23,12 @@ export const OrderContextProvider = (props) => {
 
 
     // for order address
-    const addOrderAddress=async ()=>{
+    const addOrderAddress=async ({setIsSubmitting})=>{
         try{
+            setIsSubmitting(true)
             const joinedAddress=`${userAddress.street}, ${userAddress.city}, ${userAddress.state}, ${userAddress.zipcode}, ${userAddress.country}`
             const res=await NetWorkCalls({method:'post',path:'/user/address',data:{address:joinedAddress,mobile_number:userAddress.mobile_number}})
-
+            setIsSubmitting(false)
             if (res){
                 navigateTo('/place-order-next')
             }
@@ -40,10 +41,11 @@ export const OrderContextProvider = (props) => {
         
     }
 
-    const getOrderAddress=async ()=>{
+    const getOrderAddress=async ({setIsSubmitting})=>{
         try{
+            setIsSubmitting(true)
             const res=await NetWorkCalls({method:'get',path:'/user/address'})
-
+            setIsSubmitting(false)
             if (res) {
                 setUserAddress(
                     {
