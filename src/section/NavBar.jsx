@@ -106,7 +106,7 @@ const NavBar = () => {
                     </p>
                     {Cookies.get('role')=='admin' && <button
                       onClick={() => {
-                        window.open('http://localhost:5174/')
+                        window.open(import.meta.env.VITE_ADMIN_URL)
                         setDropdownOpen(false);
                       }}
                       className="w-full text-left px-4 py-2 text-purple-500 hover:bg-gray-100 font-semibold border-b"
