@@ -1,11 +1,8 @@
-import NavBar from '../section/NavBar'
-import { MobileAppBar } from '../section/MobileAppBar'
 import React from 'react'
-import { isMobile } from 'react-device-detect'
 import Title from '../components/Title'
 import { GrayBgButton } from '../components/Buttons'
-import { ourStory, ourWork, ourWorkImageUrl } from '../constant'
-import Orders from './Orders'
+import {  ourWork, ourWorkImageUrl } from '../constant'
+
 
 export default function KnowUsPage() {
   return (
@@ -50,6 +47,7 @@ export default function KnowUsPage() {
                 <div className='text-center font-semibold mx-2 w-full'>
                     <GrayBgButton text={"Whatsapp"} canHover={true}></GrayBgButton>
                     <GrayBgButton text={"Email"} canHover={true}></GrayBgButton>
+                    <GrayBgButton text={"Instagram"} canHover={true}></GrayBgButton>
                 </div>
             </div>
 
