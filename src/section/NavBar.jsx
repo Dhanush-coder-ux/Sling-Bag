@@ -75,19 +75,18 @@ const NavBar = () => {
              </div>
           </Link>
 
-          {/* --- 2. Desktop Navigation (Hidden on Mobile) --- */}
+        
           <div className="hidden md:flex space-x-8 items-center">
             <NavItem to="/">Home</NavItem>
             <NavItem to="/collections">Product</NavItem>
-            <NavItem to="/know-us">Know Us</NavItem>
             <NavItem to="/orders">Orders</NavItem>
           </div>
 
-          {/* --- 3. Right Actions (Cart, Profile, Toggle) --- */}
+       
           <div className="flex items-center gap-6">
        
             {/* Cart Icon */}
-            <NavLink to="/cart" className="relative group p-2 rounded-full hover:bg-gray-100 transition-colors">
+            <NavLink to="/cart" className="hidden md:flex relative group p-2 rounded-full hover:bg-gray-100 transition-colors">
               <img src="/icons/cart.svg" width={24} height={24} alt="Cart" className="opacity-80 group-hover:opacity-100" />
               <span className="absolute -top-1 -right-1 bg-black text-white text-[10px] font-bold w-5 h-5 flex items-center justify-center rounded-full border-2 border-white shadow-sm">
                 {cartCount > 99 ? "99+" : cartCount}
