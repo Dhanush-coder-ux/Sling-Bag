@@ -11,7 +11,7 @@ export default function KnowUsPage() {
   return (
     <>
     {/* for crossplatform appbar */}
-        { isMobile ? <MobileAppBar  appbarTitle={"Know Us"}  withBackArrow={false}></MobileAppBar> : <NavBar/>}
+        {/* { isMobile ? <MobileAppBar  appbarTitle={"Know Us"}  withBackArrow={false}></MobileAppBar> : <NavBar/>} */}
  
     {/* Know us contents */}
     <div className='flex flex-row justify-center items-center max-sm:mt-20 max-sm:mb-20 lg:mt-5 lg:mb-0 md:mt-15 md:mb-15'>

@@ -5,6 +5,7 @@ import { useContext, useEffect } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import { LoginContext } from '../context/LoginContext'
 import { CartContext } from '../context/CartContext'
+import KnowUsPage from './KnowUs'
 
 
 const Home = () => {
@@ -41,6 +42,7 @@ const Home = () => {
         {/* Hero Section */}
         <Hero/>
         {/* <LatestProduct/> */}
+        <KnowUsPage/>
         
 
     </div>
