@@ -1,72 +1,113 @@
 import { NavLink } from "react-router-dom";
-import { Trash2 } from "lucide-react";
+import { Trash2, ShoppingBag, Plus } from "lucide-react";
 import { useContext } from "react";
 import { CartContext } from "../context/CartContext";
 
+export const ProductCard = ({ id, title, description, price, images, isLatest = true }) => {
+    const rupees = "₹";
 
-export const ProductCard = ({id, title, description, price, images,isLatest=true}) => {
-    const rupees = "₹"
-    
     return (
-        <NavLink to={`/product/${id}`} >
-            <div key={id} className="w-full max-w-sm bg-white border border-gray-200 rounded shadow-sm dark:bg-gray-800 dark:border-gray-700 relative">
-                {/* Latest Badge */}
-                {isLatest && <div className="absolute top-2 left-2">
-                    <span className="bg-gradient-to-r from-green-500 via-green-300 to-green-200 text-green-800 font-bold px-3 py-1 rounded-r-md text-sm 
-                                     shadow-sm shadow-green-300 border-2 border-green-200 backdrop-blur">
-                        Latest
-                    </span>
-                </div>}
-
-                <div className="w-full h-60 max-sm:h-40">
-                    <img className="p-5 w-full h-full max-sm:px-2 max-sm:pb-2 rounded-t-lg" src={images[0]} alt="product image" />
-                </div>
+        <NavLink to={`/product/${id}`} className="group block">
+            <div className="relative w-full max-w-sm overflow-hidden rounded-2xl bg-white transition-all duration-300 hover:shadow-xl border border-gray-100">
                 
-                <div className="px-5 pb-5">
-                    <div>
-                        <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white line-clamp-1 max-sm:text-sm">
+                {/* Image Container with Zoom Effect */}
+                <div className="relative aspect-[4/5] overflow-hidden bg-gray-100">
+                    <img 
+                        className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110" 
+                        src={images[0]} 
+                        alt={title} 
+                    />
+                    
+                    {/* Overlay Gradient (Optional, adds depth text readability if you overlay text) */}
+                    <div className="absolute inset-0 bg-black/0 transition-colors group-hover:bg-black/5" />
+
+                    {/* Latest Badge - Glassmorphism */}
+                    {isLatest && (
+                        <div className="absolute top-3 left-3">
+                            <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-white/90 text-black backdrop-blur-md shadow-sm border border-white/20">
+                                <span className="w-1.5 h-1.5 rounded-full bg-green-500 mr-2 animate-pulse"></span>
+                                Latest
+                            </span>
+                        </div>
+                    )}
+
+                    {/* Quick Action Button (Appears on Hover) */}
+                    {/* <div className="absolute bottom-4 right-4 translate-y-10 opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100">
+                        <button className="flex h-10 w-10 items-center justify-center rounded-full bg-black text-white shadow-lg hover:bg-gray-800">
+                            <Plus size={20} />
+                        </button>
+                    </div> */}
+                </div>
+
+                {/* content */}
+                <div className="p-5">
+                    <div className="mb-2">
+                        <h5 className="text-lg font-bold text-gray-900 line-clamp-1 group-hover:text-gray-700 transition-colors">
                             {title}
                         </h5>
-                        <h5 className="text-xl max-sm:text-sm font-semibold tracking-tight text-gray-700 line-clamp-2">
+                        <p className="text-sm text-gray-500 line-clamp-1 mt-1">
                             {description}
-                        </h5>
+                        </p>
                     </div>
-                
-                    <div className="flex items-center justify-between">
-                        <span className="text-3xl max-sm:text-xl font-bold py-4 max-sm:py-2 dark:text-white line-clamp-1">
-                            {`${rupees} ${price}`}
+
+                    <div className="flex items-center justify-between mt-4">
+                        <span className="text-xl font-bold text-gray-900">
+                            {rupees} {price.toLocaleString()}
                         </span>
+                        {/* Decorative generic rating or tag can go here */}
+                        <div className="text-xs font-medium text-gray-400">
+                            Free Delivery
+                        </div>
                     </div>
                 </div>
             </div>
         </NavLink>
-    )
-}
+    );
+};
 
+export const CartProductCard = ({ product: { id, title, description, quantity, price, images } }) => {
+    const { deleteCartProduct } = useContext(CartContext);
 
-
-export const CartProductCard=({product:{id,title,description,quantity,price,images}})=>{
-    const {deleteCartProduct}=useContext(CartContext)
     return (
-       
-            <div>
-                <div className="flex bg-white border border-gray-200 rounded-lg shadow-sm flex-row max-w-xl hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700  max-sm:h-40 w-200 max-sm:w-auto ">
-                    <NavLink to={`/product/${id}`} className={"flex justify-center items-center w-100 h-50 m-2 max-sm:w-60 max-sm:h-full max-sm:m-0"}>
-                        <img className="rounded-xl w-full h-full" src={images[0]} alt=""/>
-                    </NavLink>
-                    <div className="flex flex-col justify-between p-4 leading-normal w-full">
-                        <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white line-clamp-1 max-sm:text-sm">{title}</h5>
-                        <p className="mb-3 text-xl max-sm:text-sm text-gray-700 dark:text-gray-400 font-bold line-clamp-1">{`₹ ${price}`}</p>
-                        <p className="mb-3 text-xl max-sm:text-sm text-gray-700 dark:text-gray-400 font-bold line-clamp-1">Qty : {quantity}</p>
-                        <p className="mb-3 font-normal text-gray-700 dark:text-gray-400 line-clamp-1">{description}</p>
+        <div className="group relative flex w-full flex-row items-center gap-4 rounded-xl border border-gray-100 bg-white p-3 shadow-sm transition-all hover:shadow-md hover:border-gray-200">
+            
+            {/* Image Thumbnail */}
+            <NavLink to={`/product/${id}`} className="shrink-0 relative h-24 w-24 overflow-hidden rounded-lg bg-gray-100">
+                <img 
+                    className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" 
+                    src={images[0]} 
+                    alt={title} 
+                />
+            </NavLink>
+
+            {/* Content Info */}
+            <div className="flex flex-1 flex-col justify-between py-1">
+                <div className="flex justify-between items-start">
+                    <div>
+                        <h5 className="text-base font-bold text-gray-900 line-clamp-1">{title}</h5>
+                        <p className="text-xs text-gray-500 line-clamp-1 mt-0.5">{description}</p>
                     </div>
-                    <div className='text-lg font-bold flex p-2 justify-center items-start'>
-                        {/* <img src="/icons/delete.svg" className='cursor-pointer h-10 w-10' alt="" /> */}
-                        <Trash2 color="red" cursor={'pointer'} onClick={()=>deleteCartProduct({productId:id})}></Trash2>
+                    
+                    {/* Delete Button - Top Right for easy access */}
+                    <button 
+                        onClick={() => deleteCartProduct({ productId: id })}
+                        className="rounded-full p-2 text-gray-400 transition-colors hover:bg-red-50 hover:text-red-500"
+                        aria-label="Remove item"
+                    >
+                        <Trash2 size={18} />
+                    </button>
+                </div>
+
+                <div className="mt-3 flex items-center justify-between">
+                    <div className="flex items-center gap-3">
+                        <span className="text-sm font-medium text-gray-500">Qty:</span>
+                        <span className="rounded-md bg-gray-100 px-2 py-0.5 text-sm font-semibold text-gray-900">
+                            {quantity}
+                        </span>
                     </div>
+                    <p className="text-lg font-bold text-gray-900">₹ {price.toLocaleString()}</p>
                 </div>
             </div>
-   
-        
-    )
-}
+        </div>
+    );
+};
