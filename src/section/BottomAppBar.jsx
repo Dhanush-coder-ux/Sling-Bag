@@ -1,6 +1,7 @@
 import React, { useContext } from 'react'
 import { NavigationButton } from '../components/Buttons'
 import { CartContext } from '../context/CartContext'
+import { Contact } from 'lucide-react';
 
 export function BottomAppBar() {
     const { cartCount }=useContext(CartContext)
@@ -8,7 +9,8 @@ export function BottomAppBar() {
         {label:'Home',icon:"/icons/home.svg",route:'/',canShowBadge:false},
         {label:'Products',icon:"/icons/product.svg",route:'/collections',canShowBadge:false},
         {label:'Cart',icon:"/icons/cart.svg",route:'/cart',canShowBadge:true,badgeCount:cartCount},
-         {label:'Orders',icon:"/icons/orders.svg",route:'/orders',canShowBadge:false}
+         {label:'Orders',icon:"/icons/orders.svg",route:'/orders',canShowBadge:false},
+         {label:'Contact',icon:Contact,route:'/contact',canShowBadge:false}
     ];
     
     return (
