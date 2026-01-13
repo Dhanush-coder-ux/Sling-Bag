@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
 import { NavigationButton } from '../components/Buttons'
-import { CartContext } from '../context/CartContext'
+import { CartContext } from '../context/CartContext';
 import { Contact } from 'lucide-react';
 
 export function BottomAppBar() {
