@@ -54,10 +54,7 @@ export const ProductCard = ({ id, title, description, price, images, isLatest = 
                         <span className="text-xl font-bold text-gray-900">
                             {rupees} {price.toLocaleString()}
                         </span>
-                        {/* Decorative generic rating or tag can go here */}
-                        <div className="text-xs font-medium text-gray-400">
-                            Free Delivery
-                        </div>
+                      
                     </div>
                 </div>
             </div>

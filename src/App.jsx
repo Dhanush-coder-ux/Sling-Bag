@@ -7,12 +7,12 @@ import { ProductsPage } from './pages/Product'
 import { isMobile, isTablet, isDesktop } from 'react-device-detect';
 import { BottomAppBar } from './section/BottomAppBar';
 import ProductView from './pages/ProductView';
-import KnowUsPage from './pages/KnowUs';
+
 import Orders from './pages/Orders';
 import PlaceOrder from './pages/PlaceOrder';
 import PlaceOrderNext from './pages/PlaceOrderNext';
-import { useEffect } from 'react'
-import axios from 'axios'
+
+import Contact from './pages/Contact';
 
 
 
@@ -28,7 +28,7 @@ function App() {
       <Route path='/cart' element={<Cart/>}/>
       <Route path='/product/:productId' element={<ProductView/>} />
       <Route path='/orders' element={<Orders/>} />
-      <Route path='/know-us' element={<KnowUsPage/>}/>
+      <Route path='/contact' element={<Contact/>}/>
       <Route path='/place-order' element={<PlaceOrder/>}/>
       <Route path='/place-order-next' element={<PlaceOrderNext/>}/>
     </Routes>

@@ -1,63 +1,79 @@
 import React from 'react'
 import Title from '../components/Title'
-import { GrayBgButton } from '../components/Buttons'
-import {  ourWork, ourWorkImageUrl } from '../constant'
-
+import { GrayBgButton } from '../components/Buttons' // Assuming this component exists based on your imports
+import { ourWork, ourWorkImageUrl } from '../constant'
 
 export default function KnowUsPage() {
   return (
-    <>
-    {/* for crossplatform appbar */}
-        {/* { isMobile ? <MobileAppBar  appbarTitle={"Know Us"}  withBackArrow={false}></MobileAppBar> : <NavBar/>} */}
- 
-    {/* Know us contents */}
-    <div className='flex flex-row justify-center items-center max-sm:mt-20 max-sm:mb-20 lg:mt-5 lg:mb-0 md:mt-15 md:mb-15'>
-        <div className='grid grid-cols-1 w-200'>
+    <div className="bg-white min-h-screen">
+      
+      {/* Main Container */}
+      <div className='max-w-6xl mx-auto px-6 py-16 md:py-24'>
+
+        {/* --- SECTION 1: OUR STORY --- */}
+        <section className='flex flex-col items-center text-center mb-24'>
+          <div className='mb-8'>
+            <Title 
+                text1={"Our"} 
+                text2={"Story"} 
+                text1ClassName={"text-3xl md:text-4xl font-light text-gray-500"} 
+                text2ClassName={"text-3xl md:text-4xl font-bold text-gray-800"} 
+            />
+          </div>
+
+          <div className='max-w-3xl'>
+            <p className='text-gray-600 text-base md:text-lg leading-relaxed font-normal'>
+              {/* Using a fallback if ourWork is empty, otherwise rendering the content */}
+              {ourWork || "We started with a simple idea: to build software that matters. Over the years, our passion for technology and design has grown into a dedicated team solving complex problems."}
+            </p>
+          </div>
+        </section>
+
+        {/*Divider (Optional) */}
+        <div className="w-full h-px bg-gray-200 mb-24 hidden md:block"></div>
+
+        {/* --- SECTION 2: OUR WORK --- */}
+        <section>
+          <div className='mb-12 text-center md:text-left'>
+            <Title 
+                text1={"Our"} 
+                text2={"Work"} 
+                text1ClassName={"text-3xl md:text-4xl font-light text-gray-500"} 
+                text2ClassName={"text-3xl md:text-4xl font-bold text-gray-800"} 
+            />
+          </div>
+
+          {/* Grid Layout: Image Left, Text Right (on desktop) */}
+          <div className='grid grid-cols-1 md:grid-cols-2 gap-12 items-center'>
             
-
-            {/* our story content */}
-            <div className='flex flex-col justify-center items-center align-middle'>
-                <div>
-                    <Title text1={"Our"} text2={"Story"} text1ClassName={"font-bold text-[30px]"} text2ClassName={"font-bold"} divClassName={"mb-0"}></Title>
-                </div>
-
-                <div className='font-semibold mx-2 text-center'>
-                    <h1 className='mt-5'>{ourWork}</h1>
-                </div> 
+            {/* Image Side */}
+            <div className='relative group overflow-hidden rounded-2xl shadow-xl'>
+              <img 
+                src={ourWorkImageUrl } 
+                alt="Our Featured Work" 
+                className='w-full h-auto object-cover transform transition-transform duration-500 group-hover:scale-105'
+              />
+              {/* Optional Overlay on Hover */}
+              <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors duration-300"></div>
             </div>
 
-            {/* our work content */}
-            <div className='flex flex-col mt-10 justify-center items-center'>
-                <div>
-                    <Title text1={"Our"} text2={"Work"} text1ClassName={"font-bold text-[30px]"} text2ClassName={"font-bold"}></Title>
-                </div>
+            {/* Content Side */}
+            <div className='flex flex-col justify-center space-y-6'>
+              <h3 className="text-2xl font-bold text-gray-800">
+                Delivering Excellence
+              </h3>
+              
+              <p className='text-gray-600 leading-relaxed font-normal text-base'>
+                {ourWork}
+              </p>
 
-                <div className='font-semibold mx-2 text-center'>
-                    <img src={ourWorkImageUrl} alt="" className='object-cover rounded-2xl  w-full mt-5'/>
-                    <h1 className='mt-5'>{ourWork}</h1>
-                </div>  
+            
             </div>
 
-            {/* contact us content */}
-            <div className='flex flex-col mt-10 justify-center items-center'>
-                <div>
-                    <Title text1={"Contact"} text2={"Us"} text1ClassName={"font-bold text-[30px]"} text2ClassName={"font-bold"}></Title>
-                </div>
+          </div>
+        </section>
 
-                <div className='text-center font-semibold mx-2 w-full'>
-                    <GrayBgButton text={"Whatsapp"} canHover={true}></GrayBgButton>
-                    <GrayBgButton text={"Email"} canHover={true}></GrayBgButton>
-                    <GrayBgButton text={"Instagram"} canHover={true}></GrayBgButton>
-                </div>
-            </div>
-
-        </div>
+      </div>
     </div>
-    
-    
-    
-        
-    </>
-    
   )
 }

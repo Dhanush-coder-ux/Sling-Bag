@@ -80,6 +80,7 @@ const NavBar = () => {
             <NavItem to="/">Home</NavItem>
             <NavItem to="/collections">Product</NavItem>
             <NavItem to="/orders">Orders</NavItem>
+            <NavItem to="/contact">Contact</NavItem>
           </div>
 
        

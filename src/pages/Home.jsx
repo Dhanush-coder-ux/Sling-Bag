@@ -1,10 +1,10 @@
 import NavBar from '../section/NavBar'
 import Hero from '../section/Hero'
-import LatestProduct from '../section/LatestProduct'
 import { useContext, useEffect } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import { LoginContext } from '../context/LoginContext'
 import { CartContext } from '../context/CartContext'
+import Footer from './Footer'
 import KnowUsPage from './KnowUs'
 
 
@@ -43,6 +43,7 @@ const Home = () => {
         <Hero/>
         {/* <LatestProduct/> */}
         <KnowUsPage/>
+        <Footer/>
         
 
     </div>
